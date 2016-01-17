@@ -10,6 +10,7 @@
 #include<queue>
 #include<vector>
 #include<map>
+#include<hash_map>
 
 namespace TextBox {
 	using namespace std;
@@ -22,14 +23,17 @@ namespace TextBox {
 	using namespace System::Xml;
 	using namespace System::Runtime::InteropServices;
 	using namespace msclr::interop;
-
+	using namespace stdext;
+	using namespace System::IO;
 	/// <summary>
 	/// Summary for MyForm
 	/// </summary>
 	map<string, int> noOfSymbol,npdaSymbol;
 	vector<string >grammer;
-	vector<string> parseTable[10][10],cnfTable[10];
+	vector<string> parseTable[200][200],cnfTable[200];
 	vector<int>tot_word;
+	hash_map<wstring, string> hash;
+	hash_map<wstring, string>::const_iterator it;
 	bool notFound = false;
 	bool ischeckfinished;
 	int tot_line;
@@ -174,9 +178,9 @@ namespace TextBox {
 		array<String^>^ words;
 
 
-		array<String^>^ grammerWords = gcnew array<String^>(50);
+		array<String^>^ grammerWords = gcnew array<String^>(110);
 
-		array<String^, 2>^ AllgrammerWords = gcnew array<String^, 2>(50, 50);
+		array<String^, 2>^ AllgrammerWords = gcnew array<String^, 2>(100, 100);
 
 
 		array<String^>^ MainInput;
@@ -396,6 +400,7 @@ namespace TextBox {
 			noOfSymbol["conj"] = 5;
 			noOfSymbol["verb"] = 6;
 			noOfSymbol["$"] = 7;
+			return;
 		}
 
 		void genParseTable()
@@ -483,7 +488,7 @@ namespace TextBox {
 			parseTable[13][4].push_back("verb");
 
 			parseTable[13][6].push_back("verb");
-
+			return;
 		}
 
 		void parseAlgorithm()
@@ -582,8 +587,9 @@ namespace TextBox {
 
 		}
 
-	public: System::Void xmlReadFunction()
+	public: System::Void xmlReadFunction()  // This function reads data from xml file and save into two txt files
 	{
+				/*
 				String ^ inputText = mainTextBox->Text;
 
 				String^ delimStr = " ,.:\t";
@@ -593,21 +599,27 @@ namespace TextBox {
 
 
 				words = inputText->Split(delimiter);
+				*/
 
 				XmlTextReader ^ xReader = gcnew XmlTextReader("word.xml");
-
+				wstring Index = L"";
+				string Key = "";
+				int cnt = 0;
 				while (xReader->Read())
 				{
 					switch (xReader->NodeType)
 					{
 					case XmlNodeType::Element:
 					{
-												 mainTextBox->Text += (xReader->Name);
+												 Index = marshal_as<std::wstring>(xReader->Name);
 					}break;
 					case XmlNodeType::Text:
 					{
-											  lastTextBox->Text += (" " + xReader->Value + "\n");
-
+											  Key = marshal_as<std::string>(xReader->Value);
+					}break;
+					case XmlNodeType::EndElement:
+					{
+													hash[Index] = Key;
 					}break;
 
 					default:
@@ -615,11 +627,23 @@ namespace TextBox {
 					}
 
 				}
+				lastTextBox->Text += hash.size().ToString();
+				return;
+				/*
+				StreamWriter^ newFile = gcnew StreamWriter("newFile.txt");
 
 
 
+				for (it = hash.begin(); it != hash.end(); it++)
+				{
+					String^ f = gcnew String(it->first.c_str());
+					String^ s = gcnew String(it->second.c_str());
+					lastTextBox->Text += " " + f + " ";
+					newFile->WriteLine("<" + f + ">" + s + "</" + f + ">");
+				}
+				*/
 
-
+				//lastTextBox->Text = " " +  hash.size().ToString();
 
 	}
 
@@ -650,9 +674,6 @@ namespace TextBox {
 			   words = inputText->Split(delimiter);
 
 
-			   XmlDocument^ doc = gcnew XmlDocument;
-			   doc->Load("word.xml");
-
 			   //Display all the book titles.
 			   int i = 0;
 			   //lastTextBox->Text += "";
@@ -669,12 +690,14 @@ namespace TextBox {
 				   }
 				   */
 
-				   XmlNodeList^ elemList = doc->GetElementsByTagName(str);
+				   // XmlNodeList^ elemList = doc->GetElementsByTagName(str);
 
 				   //mainTextBox->Text += str + " ";
 				   
+				   wstring index = marshal_as<std::wstring>(str);
 
-				   if (elemList->Count == 0)
+				   it = hash.find(index);
+				   if (it == hash.end())
 				   {
 					   lastTextBox->Text += str + " not found :( ";
 					   notFound = true; 
@@ -682,7 +705,9 @@ namespace TextBox {
 
 				   }
 				   else
-				   grammerWords[i++] = ((elemList[0]->InnerXml));
+				   {
+					   grammerWords[i++] = gcnew String ((it->second).c_str());
+				   }
 				   //AllgrammerWords[tot_line,i++] = ((elemList[0]->InnerXml));
 
 			   }
@@ -693,6 +718,7 @@ namespace TextBox {
 
 
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
+				 xmlReadFunction();
 				 genParseTable();
 				 assignNpdaSymbols();
 	}
