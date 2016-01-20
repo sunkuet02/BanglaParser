@@ -191,9 +191,74 @@ namespace TextBox {
 #pragma endregion
 
 		// table for npda
+		public:void assignNpdaSymbolValue(string s, int val)
+		{
+				   if (npdaSymbol.find(s) == npdaSymbol.end())
+				   {
+					   npdaSymbol[s] = val;
+				   }
+		}
 
 		public: void makeCnfTable()
 		{
+					StreamReader^ reader = File::OpenText("npdaGrammer.txt");
+					String^ readString;
+					int idx = 1; 
+
+					while ((readString= reader->ReadLine())!=nullptr)
+					{
+						string str = marshal_as<std::string>(readString); 
+
+						string leftString;
+
+						int productNo = 1;
+
+						int i = 0;
+						while (str[i] != '-')
+						{
+							leftString.push_back(str[i]);
+							i++; 
+						}
+
+						assignNpdaSymbolValue(leftString, idx++);
+
+						// lastTextBox->Text += gcnew String(leftString.c_str()) + " " + noOfSymbol[leftString].ToString() + "\r\n";
+
+						for (++i; i < str.size(); i++)
+						{
+							string first = "", second = ""; 
+							while ( (str[i] != ' ' && str[i] !='|' ) && i< str.size() )
+							{
+								first.push_back(str[i]);
+								i++;
+							}
+
+							if (str[i] == '|' || i == str.size())
+							{
+								//lastTextBox->Text += gcnew String(first.c_str()) + "\r\n";
+								if (first.size()) assignNpdaSymbolValue(first, idx++);
+								cnfTable[npdaSymbol[leftString]].push_back(first);
+								continue;
+							}
+
+							i++; 
+							if (i < str.size())
+							while (str[i] != '|' && i< str.size())
+							{
+								second.push_back(str[i]);
+								i++;
+							}
+
+							if (first.size()) assignNpdaSymbolValue(first,idx++);
+							if (second.size()) assignNpdaSymbolValue(second, idx++);
+							//lastTextBox->Text += gcnew String((first + " " + second).c_str()) + "\r\n";
+							cnfTable[npdaSymbol[leftString]].push_back(first + " " + second);
+						}
+
+
+					}
+
+					/*
 					cnfTable[1].push_back("NP VP");
 					cnfTable[2].push_back("pron");
 					cnfTable[2].push_back("A NP1");
@@ -213,12 +278,14 @@ namespace TextBox {
 					cnfTable[10].push_back("VP1");
 					cnfTable[11].push_back("conj");
 					cnfTable[12].push_back("adj");
+					*/
 
 		}
 
 		public: void assignNpdaSymbols()
 		{
 					//Non-terminal
+
 					npdaSymbol["S"] = 1;
 					npdaSymbol["NP"] = 2;
 					npdaSymbol["NP1"] = 3;
@@ -242,7 +309,6 @@ namespace TextBox {
 					npdaSymbol["adj"] = 105;
 					npdaSymbol["conj"] = 106;
 
-					makeCnfTable();
 
 		}
 
@@ -271,7 +337,7 @@ namespace TextBox {
 
 			//int neumericVal = npdaSymbol[current];
 
-			lastTextBox->Text += "  " + gcnew String(current.c_str())+"\r\n";
+			lastTextBox->Text += gcnew String(current.c_str())+"\r\n";
 			//lastTextBox->Text +=" "+ neumericVal;
 			string term = "";
 
@@ -393,6 +459,7 @@ namespace TextBox {
 			noOfSymbol["VP3"] = 11;
 			noOfSymbol["VP4"] = 12;
 			noOfSymbol["VP5"] = 13;
+
 			noOfSymbol["noun"] = 1;
 			noOfSymbol["pron"] = 2;
 			noOfSymbol["adv"] = 3;
@@ -627,7 +694,7 @@ namespace TextBox {
 					}
 
 				}
-				lastTextBox->Text += hash.size().ToString();
+				//lastTextBox->Text += hash.size().ToString();
 				return;
 				/*
 				StreamWriter^ newFile = gcnew StreamWriter("newFile.txt");
@@ -718,9 +785,10 @@ namespace TextBox {
 
 
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
+				
 				 xmlReadFunction();
 				 genParseTable();
-				 assignNpdaSymbols();
+				 makeCnfTable();
 	}
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 
