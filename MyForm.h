@@ -33,6 +33,7 @@ namespace TextBox {
 	vector<string> parseTable[200][200],cnfTable[200];
 	vector<int>tot_word;
 	hash_map<wstring, string> hash;
+	hash_map<wstring, bool > bivoktiMap;
 	hash_map<wstring, string>::const_iterator it;
 	vector<string>splitgrammer[100][100];
 	vector<string>FIRST[100], FOLLOW[100];
@@ -888,7 +889,7 @@ namespace TextBox {
 						if (parseTable[nonIdx][terIdx][i] != "#")
 						{
 							st.push(parseTable[nonIdx][terIdx][i]);
-							mainTextBox->Text += "  " + gcnew String(parseTable[nonIdx][terIdx][i].c_str());
+							//mainTextBox->Text += "  " + gcnew String(parseTable[nonIdx][terIdx][i].c_str());
 							//mainTextBox->Text += "  " + i;
 						}
 					}
@@ -1022,6 +1023,7 @@ namespace TextBox {
 			   //lastTextBox->Text += "";
 			   for each (String ^ str in words)
 			   {
+				   if (str == " ") continue; 
 				   /*string temp = marshal_as<std::string>(str);
 				   if (temp== "\u0964")
 				   {
@@ -1042,6 +1044,35 @@ namespace TextBox {
 				   it = hash.find(index);
 				   if (it == hash.end())
 				   {
+					   wstring compString = L""; 
+					   bool Found = false;
+
+					   for (int i = 0; i < index.size(); i++)
+					   {
+						   compString += index[i] ; 
+						   if (hash.find(compString) != hash.end())
+						   {
+							   wstring bivoktiString = L""; 
+
+							   for (int j = i + 1; j < index.size(); j++)
+								   bivoktiString += index[j];
+
+							   if (bivoktiMap.find(bivoktiString) != bivoktiMap.end())
+							   {
+								   Found = true;
+								   break;
+							   }
+						   }
+					   }
+
+					   if (Found)
+					   {
+						   it = hash.find(compString);
+						   lastTextBox->Text += " " + gcnew String((it->second).c_str());
+						   grammerWords[i++] = gcnew String((it->second).c_str());
+						   continue;
+					   }
+
 					   lastTextBox->Text += str + " not found :( ";
 					   notFound = true; 
 					   //return;
@@ -1049,6 +1080,7 @@ namespace TextBox {
 				   }
 				   else
 				   {
+					   lastTextBox->Text += " " + gcnew String((it->second).c_str());
 					   grammerWords[i++] = gcnew String ((it->second).c_str());
 				   }
 				   //AllgrammerWords[tot_line,i++] = ((elemList[0]->InnerXml));
@@ -1058,16 +1090,28 @@ namespace TextBox {
 			  getGrammer();
 	}
 
+	private: void readBivokti(){
+				 StreamReader^ reader = File::OpenText("bivokti.txt");
+				 String^ readString;
 
+				 while ((readString = reader->ReadLine()) != nullptr)
+				 {
+					 wstring index = marshal_as<std::wstring>(readString);
+
+					 bivoktiMap[index] = true;
+				 }
+
+				 return; 
+	}
 
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
-				
+				 readBivokti();
 				 xmlReadFunction();
 				 genParseTable();
 				 makeCnfTable();
 	}
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-
+				 lastTextBox->Text = "";
 				 tot_line = 0;
 				 grammer.clear();
 				 notFound = false;
@@ -1082,19 +1126,20 @@ namespace TextBox {
 					}
 					 getGrammer();
 					 parseAlgorithm();
-				 }*/
+				 } */
 				 if (!notFound)
 				 {
 					 lastTextBox->Text = "";
 					 //genParseTable();
 					 parseAlgorithm();
 				 }
+				 
 	}
 	private: System::Void button1_Click_1(System::Object^  sender, System::EventArgs^  e) {
 				 grammer.clear();
 				 notFound = false;
 
-
+				 lastTextBox->Text = "";
 				 splitInputText();
 				 if (!notFound)
 				 {

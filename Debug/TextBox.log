@@ -1,9 +1,39 @@
-﻿Build started 23-Jan-16 3:26:16 PM.
-     1>Project "C:\Users\Sun\Documents\Visual Studio 2013\Projects\NPDA\TextBox.vcxproj" on node 2 (Build target(s)).
-     1>Link:
-         TextBox.vcxproj -> C:\Users\Sun\Documents\Visual Studio 2013\Projects\NPDA\Debug\TextBox.exe
-     1>Done Building Project "C:\Users\Sun\Documents\Visual Studio 2013\Projects\NPDA\TextBox.vcxproj" (Build target(s)).
+﻿Build started 25-Jan-16 4:03:58 AM.
+     1>Project "C:\Users\Sun\Documents\Visual Studio 2013\Projects\TextBox Test Project\TextBox.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /AI"C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral" /Zi /clr /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /D _MBCS /D MARKUP_STL /Gm- /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\mscorlib.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt /clr:nostdlib MyForm.cpp
+         MyForm.cpp
+     1>c:\users\sun\documents\visual studio 2013\projects\textbox test project\MyForm.h(1005): warning C4566: character represented by universal-character-name '\u0964' cannot be represented in the current code page (1252)
+     1>c:\users\sun\documents\visual studio 2013\projects\textbox test project\MyForm.h(234): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\textbox test project\MyForm.h(237): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\textbox test project\MyForm.h(252): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\textbox test project\MyForm.h(253): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\textbox test project\MyForm.h(371): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\textbox test project\MyForm.h(567): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\textbox test project\MyForm.h(596): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\textbox test project\MyForm.h(605): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\textbox test project\MyForm.h(621): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\textbox test project\MyForm.h(641): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\textbox test project\MyForm.h(651): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\textbox test project\MyForm.h(672): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\textbox test project\MyForm.h(683): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\textbox test project\MyForm.h(702): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\textbox test project\MyForm.h(705): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\textbox test project\MyForm.h(714): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\textbox test project\MyForm.h(1001): warning C4551: function call missing argument list
+     1>c:\users\sun\documents\visual studio 2013\projects\textbox test project\MyForm.h(1050): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\textbox test project\MyForm.h(1057): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\textbox test project\MyForm.h(1072): warning C4258: 'i' : definition from the for loop is ignored; the definition from the enclosing scope is used
+                 c:\users\sun\documents\visual studio 2013\projects\textbox test project\MyForm.h(1050) : definition of 'i' ignored
+                 c:\users\sun\documents\visual studio 2013\projects\textbox test project\MyForm.h(1022) : definition of 'i' used
+     1>MyForm.cpp(17): warning C4829: Possibly incorrect parameters to function main. Consider 'int main(Platform::Array<Platform::String^>^ argv)'
+     1>c:\users\sun\documents\visual studio 2013\projects\textbox test project\myform.h(453): warning C4715: 'TextBox::MyForm::npdaAlgorithm' : not all control paths return a value
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Sun\Documents\Visual Studio 2013\Projects\TextBox Test Project\Debug\TextBox.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /ASSEMBLYRESOURCE:Debug\TextBox.MyForm.resources /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Sun\Documents\Visual Studio 2013\Projects\TextBox Test Project\Debug\TextBox.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"main" /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Sun\Documents\Visual Studio 2013\Projects\TextBox Test Project\Debug\TextBox.lib" /MACHINE:X86 Debug\Markup.obj
+         Debug\MyForm.obj
+         TextBox.vcxproj -> C:\Users\Sun\Documents\Visual Studio 2013\Projects\TextBox Test Project\Debug\TextBox.exe
+     1>Done Building Project "C:\Users\Sun\Documents\Visual Studio 2013\Projects\TextBox Test Project\TextBox.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.07
+Time Elapsed 00:00:03.03

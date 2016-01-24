@@ -105,6 +105,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="bivokti.txt" />
     <Text Include="npdaGrammer.txt" />
     <Text Include="ppGrammers.txt" />
   </ItemGroup>

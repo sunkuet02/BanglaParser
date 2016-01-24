@@ -38,5 +38,6 @@
   <ItemGroup>
     <Text Include="npdaGrammer.txt" />
     <Text Include="ppGrammers.txt" />
+    <Text Include="bivokti.txt" />
   </ItemGroup>
 </Project>
