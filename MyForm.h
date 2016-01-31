@@ -78,6 +78,15 @@ namespace TextBox {
 
 	private: System::Windows::Forms::Button^  button1;
 	private: System::Windows::Forms::PictureBox^  pictureBox1;
+	private: System::Windows::Forms::MenuStrip^  menuStrip1;
+	private: System::Windows::Forms::ToolStripMenuItem^  fileToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  saveToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  exitToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  viewToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  viewPOSToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  addPOSToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  aboutToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  helpToolStripMenuItem;
 
 
 	private:
@@ -100,14 +109,24 @@ namespace TextBox {
 			this->exitButton = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->viewToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->viewPOSToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->addPOSToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->saveToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->exitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
+			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// mainTextBox
 			// 
 			this->mainTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->mainTextBox->Location = System::Drawing::Point(12, 43);
+			this->mainTextBox->Location = System::Drawing::Point(12, 101);
 			this->mainTextBox->Multiline = true;
 			this->mainTextBox->Name = L"mainTextBox";
 			this->mainTextBox->Size = System::Drawing::Size(255, 220);
@@ -117,7 +136,7 @@ namespace TextBox {
 			// 
 			this->lastTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->lastTextBox->Location = System::Drawing::Point(397, 43);
+			this->lastTextBox->Location = System::Drawing::Point(397, 101);
 			this->lastTextBox->Multiline = true;
 			this->lastTextBox->Name = L"lastTextBox";
 			this->lastTextBox->ReadOnly = true;
@@ -127,7 +146,7 @@ namespace TextBox {
 			// 
 			// sendButton
 			// 
-			this->sendButton->Location = System::Drawing::Point(273, 80);
+			this->sendButton->Location = System::Drawing::Point(273, 129);
 			this->sendButton->Name = L"sendButton";
 			this->sendButton->Size = System::Drawing::Size(118, 23);
 			this->sendButton->TabIndex = 2;
@@ -137,7 +156,7 @@ namespace TextBox {
 			// 
 			// exitButton
 			// 
-			this->exitButton->Location = System::Drawing::Point(299, 286);
+			this->exitButton->Location = System::Drawing::Point(299, 333);
 			this->exitButton->Name = L"exitButton";
 			this->exitButton->Size = System::Drawing::Size(92, 23);
 			this->exitButton->TabIndex = 3;
@@ -147,7 +166,7 @@ namespace TextBox {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(273, 167);
+			this->button1->Location = System::Drawing::Point(273, 263);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(122, 23);
 			this->button1->TabIndex = 5;
@@ -158,26 +177,95 @@ namespace TextBox {
 			// pictureBox1
 			// 
 			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(234, 3);
+			this->pictureBox1->Location = System::Drawing::Point(249, 42);
 			this->pictureBox1->Name = L"pictureBox1";
 			this->pictureBox1->Size = System::Drawing::Size(175, 39);
 			this->pictureBox1->TabIndex = 6;
 			this->pictureBox1->TabStop = false;
 			// 
+			// menuStrip1
+			// 
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
+				this->fileToolStripMenuItem,
+					this->viewToolStripMenuItem, this->addPOSToolStripMenuItem, this->aboutToolStripMenuItem, this->helpToolStripMenuItem
+			});
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Size = System::Drawing::Size(707, 24);
+			this->menuStrip1->TabIndex = 7;
+			this->menuStrip1->Text = L"menuStrip1";
+			// 
+			// fileToolStripMenuItem
+			// 
+			this->fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->saveToolStripMenuItem,
+					this->exitToolStripMenuItem
+			});
+			this->fileToolStripMenuItem->Name = L"fileToolStripMenuItem";
+			this->fileToolStripMenuItem->Size = System::Drawing::Size(37, 20);
+			this->fileToolStripMenuItem->Text = L"File";
+			// 
+			// viewToolStripMenuItem
+			// 
+			this->viewToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->viewPOSToolStripMenuItem });
+			this->viewToolStripMenuItem->Name = L"viewToolStripMenuItem";
+			this->viewToolStripMenuItem->Size = System::Drawing::Size(44, 20);
+			this->viewToolStripMenuItem->Text = L"View";
+			// 
+			// viewPOSToolStripMenuItem
+			// 
+			this->viewPOSToolStripMenuItem->Name = L"viewPOSToolStripMenuItem";
+			this->viewPOSToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->viewPOSToolStripMenuItem->Text = L"View POS";
+			// 
+			// addPOSToolStripMenuItem
+			// 
+			this->addPOSToolStripMenuItem->Name = L"addPOSToolStripMenuItem";
+			this->addPOSToolStripMenuItem->Size = System::Drawing::Size(66, 20);
+			this->addPOSToolStripMenuItem->Text = L"Add POS";
+			// 
+			// aboutToolStripMenuItem
+			// 
+			this->aboutToolStripMenuItem->Name = L"aboutToolStripMenuItem";
+			this->aboutToolStripMenuItem->Size = System::Drawing::Size(52, 20);
+			this->aboutToolStripMenuItem->Text = L"About";
+			// 
+			// helpToolStripMenuItem
+			// 
+			this->helpToolStripMenuItem->Name = L"helpToolStripMenuItem";
+			this->helpToolStripMenuItem->Size = System::Drawing::Size(44, 20);
+			this->helpToolStripMenuItem->Text = L"Help";
+			// 
+			// saveToolStripMenuItem
+			// 
+			this->saveToolStripMenuItem->Name = L"saveToolStripMenuItem";
+			this->saveToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->saveToolStripMenuItem->Text = L"Save ";
+			// 
+			// exitToolStripMenuItem
+			// 
+			this->exitToolStripMenuItem->Name = L"exitToolStripMenuItem";
+			this->exitToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->exitToolStripMenuItem->Text = L"Exit";
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(707, 321);
+			this->ClientSize = System::Drawing::Size(707, 368);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->exitButton);
 			this->Controls->Add(this->sendButton);
 			this->Controls->Add(this->lastTextBox);
 			this->Controls->Add(this->mainTextBox);
+			this->Controls->Add(this->menuStrip1);
+			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"MyForm";
 			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
+			this->menuStrip1->ResumeLayout(false);
+			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
