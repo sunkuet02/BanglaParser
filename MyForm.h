@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "Markup.h"
+#include "addingPosForm.h"
 #using <System.Xml.dll>
 #include <msclr\marshal_cppstd.h>
 #include <msclr\marshal.h>
@@ -12,6 +13,7 @@
 #include<map>
 #include<hash_map>
 #include<ctime>
+
 
 namespace TextBox {
 	using namespace std;
@@ -40,7 +42,7 @@ namespace TextBox {
 	vector<string>FIRST[100], FOLLOW[100];
 	vector<string>Nonterminal, terminal;
 	int totProduction[100];
-
+	string returnStringFromAddingPosForm;
 
 	bool notFound = false;
 	bool ischeckfinished;
@@ -69,9 +71,22 @@ namespace TextBox {
 		}
 	};
 
+	class classForReturnPos
+	{
+	public:
+		classForReturnPos()
+		{
+
+		}
+		void returnFunction(string str)
+		{
+			returnStringFromAddingPosForm = str;
+		}
+	};
 
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
+
 	public:
 		MyForm(void)
 		{
@@ -785,7 +800,23 @@ namespace TextBox {
 
 
 	}
+	public: System::Void xmlWriteFunction()
+	{
+				XmlDocument^ doc = gcnew XmlDocument;
 
+				doc->Load("temp.xml");
+
+				XmlNode^ root = doc->DocumentElement;
+
+				//Create a new node.
+				XmlElement^ elem = doc->CreateElement(L"বাল");
+				elem->InnerText = "noun";
+
+				//Add the node to the document.
+				root->AppendChild(elem);
+
+				doc->Save("temp.xml");
+	}
 	public: System::Void xmlReadFunction()  // This function reads data from xml file and save into two txt files
 	{
 
@@ -897,7 +928,13 @@ namespace TextBox {
 						   continue;
 					   }
 
-					   lastTextBox->Text += str + " not found :( ";
+					   addingPosForm ^ newForm = gcnew addingPosForm(str);
+					   newForm->Show();
+
+					   //newForm->Close();
+
+					   lastTextBox->Text += str + " not found :( " + gcnew String( returnStringFromAddingPosForm.c_str() );
+
 					   notFound = true;
 					   //return;
 
@@ -941,6 +978,7 @@ namespace TextBox {
 				 lastTextBox->Text = timeElapsed.ToString();
 	}
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+
 				 lastTextBox->Text = "";
 				 tot_line = 0;
 				 grammer.clear();
