@@ -1,36 +1,33 @@
-﻿Build started 01-Feb-16 4:07:04 AM.
+﻿Build started 08-Feb-16 1:12:36 PM.
      1>Project "C:\Users\Sun\Documents\Visual Studio 2013\Projects\BanglaParser\TextBox.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /D _MBCS /D MARKUP_STL /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Markup.cpp
-         Markup.cpp
-         Note: MBCS build (not UTF-8)
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /AI"C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral" /Zi /clr /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /D _MBCS /D MARKUP_STL /Gm- /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\mscorlib.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt /clr:nostdlib MyForm.cpp
          MyForm.cpp
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(1093): warning C4566: character represented by universal-character-name '\u0964' cannot be represented in the current code page (1252)
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(322): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(325): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(340): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(341): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(459): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(655): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(684): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(693): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(709): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(729): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(739): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(760): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(771): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(790): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(793): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(802): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(1089): warning C4551: function call missing argument list
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(1138): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(1145): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(1160): warning C4258: 'i' : definition from the for loop is ignored; the definition from the enclosing scope is used
-                 c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(1138) : definition of 'i' ignored
-                 c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(1110) : definition of 'i' used
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(834): warning C4566: character represented by universal-character-name '\u0964' cannot be represented in the current code page (1252)
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(347): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(350): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(365): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(366): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(422): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(457): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(486): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(495): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(509): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(527): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(537): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(559): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(570): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(589): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(592): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(601): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(830): warning C4551: function call missing argument list
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(874): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(881): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(896): warning C4258: 'i' : definition from the for loop is ignored; the definition from the enclosing scope is used
+                 c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(874) : definition of 'i' ignored
+                 c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(846) : definition of 'i' used
      1>MyForm.cpp(17): warning C4829: Possibly incorrect parameters to function main. Consider 'int main(Platform::Array<Platform::String^>^ argv)'
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\myform.h(541): warning C4715: 'TextBox::MyForm::npdaAlgorithm' : not all control paths return a value
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\myform.h(453): warning C4715: 'TextBox::MyForm::npdaAlgorithm' : not all control paths return a value
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Sun\Documents\Visual Studio 2013\Projects\BanglaParser\Debug\TextBox.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /ASSEMBLYRESOURCE:Debug\TextBox.MyForm.resources /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Sun\Documents\Visual Studio 2013\Projects\BanglaParser\Debug\TextBox.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"main" /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Sun\Documents\Visual Studio 2013\Projects\BanglaParser\Debug\TextBox.lib" /MACHINE:X86 Debug\Markup.obj
          Debug\MyForm.obj
@@ -39,4 +36,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:05.63
+Time Elapsed 00:00:03.05
