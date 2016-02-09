@@ -36,7 +36,9 @@ namespace TextBox {
 	{
 	public:
 		String ^ receivedString;
-		String ^ returnString; 
+	private: System::Windows::Forms::Label^  lblMsg;
+	public:
+		String ^ returnString;
 	public:
 		addingPosForm(Void)
 		{
@@ -69,7 +71,7 @@ namespace TextBox {
 	private: System::Windows::Forms::Label^  lblShowPosName;
 	private: System::Windows::Forms::Button^  btnCancel;
 	private: System::Windows::Forms::Button^  btnSave;
-	private: System::Windows::Forms::ComboBox ^  comboBox;
+	public:  System::Windows::Forms::ComboBox^  comboBox;
 
 
 	protected:
@@ -87,22 +89,14 @@ namespace TextBox {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			
 			this->lblText = (gcnew System::Windows::Forms::Label());
 			this->lblShowPosName = (gcnew System::Windows::Forms::Label());
 			this->btnCancel = (gcnew System::Windows::Forms::Button());
 			this->btnSave = (gcnew System::Windows::Forms::Button());
-			this->comboBox = (gcnew System::Windows::Forms::ComboBox());
+			this->lblMsg = (gcnew System::Windows::Forms::Label());
+			comboBox = (gcnew System::Windows::Forms::ComboBox());
 			this->SuspendLayout();
-			// 
-			// comboBox
-			// 
-			this->comboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->comboBox->FormattingEnabled = true;
-			this->comboBox->Items->AddRange(gcnew cli::array< System::Object^  >(6) { L"noun", L"pron", L"verb", L"adv", L"adj", L"conj" });
-			this->comboBox->Location = System::Drawing::Point(247, 35);
-			this->comboBox->Name = L"comboBox";
-			this->comboBox->Size = System::Drawing::Size(121, 21);
-			this->comboBox->TabIndex = 2;
 			// 
 			// lblText
 			// 
@@ -148,11 +142,34 @@ namespace TextBox {
 			this->btnSave->UseVisualStyleBackColor = true;
 			this->btnSave->Click += gcnew System::EventHandler(this, &addingPosForm::btnSave_Click);
 			// 
+			// comboBox
+			// 
+			comboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			comboBox->FormattingEnabled = true;
+			comboBox->Items->AddRange(gcnew cli::array< System::Object^  >(6) { L"noun", L"pron", L"verb", L"adv", L"adj", L"conj" });
+			comboBox->Location = System::Drawing::Point(247, 35);
+			comboBox->Name = L"comboBox";
+			comboBox->Size = System::Drawing::Size(121, 21);
+			comboBox->TabIndex = 2;
+			// 
+			// lblMsg
+			// 
+			this->lblMsg->AutoSize = true;
+			this->lblMsg->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->lblMsg->ForeColor = System::Drawing::Color::Red;
+			this->lblMsg->Location = System::Drawing::Point(124, 78);
+			this->lblMsg->Name = L"lblMsg";
+			this->lblMsg->Size = System::Drawing::Size(41, 13);
+			this->lblMsg->TabIndex = 4;
+			this->lblMsg->Text = L"label1";
+			// 
 			// addingPosForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(437, 129);
+			this->Controls->Add(this->lblMsg);
 			this->Controls->Add(this->btnCancel);
 			this->Controls->Add(this->btnSave);
 			this->Controls->Add(comboBox);
@@ -169,33 +186,43 @@ namespace TextBox {
 #pragma endregion
 		
 	private: System::Void addingPosForm_Load(System::Object^  sender, System::EventArgs^  e) {
+				 lblMsg->Hide();
 
 				 lblText->Text = "The word " + receivedString + " not Found. Do you want to add this to POS Tagger ? ";
 				 lblShowPosName->Text = receivedString;
 
 	}
 	private: System::Void btnSave_Click(System::Object^  sender, System::EventArgs^  e) {
-				 XmlDocument^ doc = gcnew XmlDocument;
-
-				 doc->Load("temp.xml");
-
-				 XmlNode^ root = doc->DocumentElement;
-
-				 //Create a new node.
-				 XmlElement^ elem = doc->CreateElement(receivedString);
 				 
-				 elem->InnerText = comboBox->Text;
+				 if (comboBox->Text == "")
+				 {
+					 lblMsg->Text = "Please, Select an Item";
+					 lblMsg->Show();
+				 }
+				 else
+				 {
+					 XmlDocument^ doc = gcnew XmlDocument;
 
-				 //Add the node to the document.
-				 root->AppendChild(elem);
+					 doc->Load("temp/generatedXml.xml");
 
-				 doc->Save("temp.xml");
+					 XmlNode^ root = doc->DocumentElement;
+
+					 //Create a new node.
+					 XmlElement^ elem = doc->CreateElement(receivedString);
+
+					 elem->InnerText = comboBox->Text;
+
+					 //Add the node to the document.
+					 root->AppendChild(elem);
+
+					 doc->Save("temp/generatedXml.xml");
+
+					 this->Close();
+				 }
 				 
-
-				 this->Close();
 	}
 	private: System::Void btnCancel_Click(System::Object^  sender, System::EventArgs^  e) {
-
+				 comboBox->Text = "";
 				 this->Close();
 	}
 	};

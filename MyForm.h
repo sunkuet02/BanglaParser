@@ -42,7 +42,7 @@ namespace TextBox {
 	vector<string>FIRST[100], FOLLOW[100];
 	vector<string>Nonterminal, terminal;
 	int totProduction[100];
-	string returnStringFromAddingPosForm;
+
 
 	bool notFound = false;
 	bool ischeckfinished;
@@ -71,18 +71,6 @@ namespace TextBox {
 		}
 	};
 
-	class classForReturnPos
-	{
-	public:
-		classForReturnPos()
-		{
-
-		}
-		void returnFunction(string str)
-		{
-			returnStringFromAddingPosForm = str;
-		}
-	};
 
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
@@ -338,7 +326,7 @@ namespace TextBox {
 
 	public: void makeCnfTable()
 	{
-				StreamReader^ reader = File::OpenText("npdaGrammer.txt");
+				StreamReader^ reader = File::OpenText("resource/npdaGrammer.txt");
 				String^ readString;
 				int idx = 1;
 
@@ -397,7 +385,7 @@ namespace TextBox {
 	}
 
 	public: bool npdaAlgorithm(int indx, string current)
-			{
+	{
 				if (grammer[indx] == "$" && current.size() == 0)
 				{
 					ischeckfinished = true;
@@ -465,7 +453,7 @@ namespace TextBox {
 
 				}
 
-			}
+	}
 
 	public:void calculateFirstOfGrammers()
 	{
@@ -623,7 +611,7 @@ namespace TextBox {
 
 	public: void preprocessingOfParseTable()
 	{
-				StreamReader^ reader = File::OpenText("ppGrammers.txt");
+				StreamReader^ reader = File::OpenText("resource/ppGrammers.txt");
 				String^ readString;
 				int idx = 1, idx_term = 1;
 				noOfSymbol["$"] = 0;
@@ -722,8 +710,8 @@ namespace TextBox {
 
 	}
 
-			public: void predictiveParsingAlgorithm()
-			{
+	public: void predictiveParsingAlgorithm()
+	{
 				stack<string> st;
 
 
@@ -781,7 +769,7 @@ namespace TextBox {
 				lastTextBox->Text += " Sentence is Accepted!";
 
 
-			}
+	}
 	public: Void getGrammer()
 	{
 
@@ -800,28 +788,12 @@ namespace TextBox {
 
 
 	}
-	public: System::Void xmlWriteFunction()
-	{
-				XmlDocument^ doc = gcnew XmlDocument;
 
-				doc->Load("temp.xml");
-
-				XmlNode^ root = doc->DocumentElement;
-
-				//Create a new node.
-				XmlElement^ elem = doc->CreateElement(L"বাল");
-				elem->InnerText = "noun";
-
-				//Add the node to the document.
-				root->AppendChild(elem);
-
-				doc->Save("temp.xml");
-	}
 	public: System::Void xmlReadFunction()  // This function reads data from xml file and save into two txt files
 	{
 
 
-				XmlTextReader ^ xReader = gcnew XmlTextReader("word.xml");
+				XmlTextReader ^ xReader = gcnew XmlTextReader("resource/word.xml");
 				wstring Index = L"";
 				string Key = "";
 				int cnt = 0;
@@ -847,7 +819,35 @@ namespace TextBox {
 					}
 
 				}
+				
+				XmlTextReader ^ xmlReader = gcnew XmlTextReader("temp/generatedXml.xml");
+				Index = L"";
+				Key = "";
+				cnt = 0;
+				while (xmlReader->Read())
+				{
+					switch (xmlReader->NodeType)
+					{
+					case XmlNodeType::Element:
+					{
+												 Index = marshal_as<std::wstring>(xmlReader->Name);
+					}break;
+					case XmlNodeType::Text:
+					{
+											  Key = marshal_as<std::string>(xmlReader->Value);
+					}break;
+					case XmlNodeType::EndElement:
+					{
+													hash[Index] = Key;
+					}break;
 
+					default:
+						break;
+					}
+
+				}
+				
+				xmlReader->Close();
 				return;
 
 
@@ -929,11 +929,24 @@ namespace TextBox {
 					   }
 
 					   addingPosForm ^ newForm = gcnew addingPosForm(str);
-					   newForm->Show();
+					   newForm->ShowDialog();
+
+					   string returnStringFromAddingPosForm = marshal_as<std::string>(newForm->comboBox->Text);
 
 					   //newForm->Close();
+					   if (returnStringFromAddingPosForm.size() != 0)
+					   {
+						   lastTextBox->Text += " " + gcnew String(returnStringFromAddingPosForm.c_str());
+						   grammerWords[i++] = gcnew String(returnStringFromAddingPosForm.c_str());
 
-					   lastTextBox->Text += str + " not found :( " + gcnew String( returnStringFromAddingPosForm.c_str() );
+						   hash[index] = returnStringFromAddingPosForm;
+
+						   //lastTextBox->Text += gcnew String( hash[index].c_str()) + " ";
+
+						   continue;
+					   }
+
+					   lastTextBox->Text += str + " not found :( " + "\r\n";
 
 					   notFound = true;
 					   //return;
@@ -952,7 +965,7 @@ namespace TextBox {
 	}
 
 	private: void readBivokti(){
-				 StreamReader^ reader = File::OpenText("bivokti.txt");
+				 StreamReader^ reader = File::OpenText("resource/bivokti.txt");
 				 String^ readString;
 
 				 while ((readString = reader->ReadLine()) != nullptr)
