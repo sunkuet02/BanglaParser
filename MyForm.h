@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "Markup.h"
 #include "addingPosForm.h"
+#include "aboutForm.h"
 #using <System.Xml.dll>
 #include <msclr\marshal_cppstd.h>
 #include <msclr\marshal.h>
@@ -12,7 +13,6 @@
 #include<vector>
 #include<map>
 #include<hash_map>
-#include<ctime>
 
 
 namespace TextBox {
@@ -50,26 +50,7 @@ namespace TextBox {
 	//
 	/// Timmer class 
 	//
-	class Timer
-	{
-	private:
-		double begTime;
-	public:
-		void start()
-		{
-			begTime = clock();
-		}
-
-		double elapsedTime()
-		{
-			return ((double)clock() - begTime) / (double)CLOCKS_PER_SEC;
-		}
-
-		bool isTimeout(double seconds)
-		{
-			return seconds >= elapsedTime();
-		}
-	};
+	
 
 
 	public ref class MyForm : public System::Windows::Forms::Form
@@ -115,6 +96,9 @@ namespace TextBox {
 	private: System::Windows::Forms::ToolStripMenuItem^  addPOSToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  aboutToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  helpToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  openFileToolStripMenuItem;
+	private: System::Windows::Forms::OpenFileDialog^  openFileDialog1;
+
 
 
 	private:
@@ -139,13 +123,15 @@ namespace TextBox {
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->openFileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->saveToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->exitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->viewToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->viewPOSToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->addPOSToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->saveToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->exitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
@@ -225,13 +211,32 @@ namespace TextBox {
 			// 
 			// fileToolStripMenuItem
 			// 
-			this->fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->saveToolStripMenuItem,
-					this->exitToolStripMenuItem
+			this->fileToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+				this->openFileToolStripMenuItem,
+					this->saveToolStripMenuItem, this->exitToolStripMenuItem
 			});
 			this->fileToolStripMenuItem->Name = L"fileToolStripMenuItem";
 			this->fileToolStripMenuItem->Size = System::Drawing::Size(37, 20);
 			this->fileToolStripMenuItem->Text = L"File";
+			// 
+			// openFileToolStripMenuItem
+			// 
+			this->openFileToolStripMenuItem->Name = L"openFileToolStripMenuItem";
+			this->openFileToolStripMenuItem->Size = System::Drawing::Size(124, 22);
+			this->openFileToolStripMenuItem->Text = L"Open File";
+			this->openFileToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::openFileToolStripMenuItem_Click);
+			// 
+			// saveToolStripMenuItem
+			// 
+			this->saveToolStripMenuItem->Name = L"saveToolStripMenuItem";
+			this->saveToolStripMenuItem->Size = System::Drawing::Size(124, 22);
+			this->saveToolStripMenuItem->Text = L"Save ";
+			// 
+			// exitToolStripMenuItem
+			// 
+			this->exitToolStripMenuItem->Name = L"exitToolStripMenuItem";
+			this->exitToolStripMenuItem->Size = System::Drawing::Size(124, 22);
+			this->exitToolStripMenuItem->Text = L"Exit";
 			// 
 			// viewToolStripMenuItem
 			// 
@@ -243,7 +248,7 @@ namespace TextBox {
 			// viewPOSToolStripMenuItem
 			// 
 			this->viewPOSToolStripMenuItem->Name = L"viewPOSToolStripMenuItem";
-			this->viewPOSToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->viewPOSToolStripMenuItem->Size = System::Drawing::Size(124, 22);
 			this->viewPOSToolStripMenuItem->Text = L"View POS";
 			// 
 			// addPOSToolStripMenuItem
@@ -257,6 +262,7 @@ namespace TextBox {
 			this->aboutToolStripMenuItem->Name = L"aboutToolStripMenuItem";
 			this->aboutToolStripMenuItem->Size = System::Drawing::Size(52, 20);
 			this->aboutToolStripMenuItem->Text = L"About";
+			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::aboutToolStripMenuItem_Click);
 			// 
 			// helpToolStripMenuItem
 			// 
@@ -264,17 +270,9 @@ namespace TextBox {
 			this->helpToolStripMenuItem->Size = System::Drawing::Size(44, 20);
 			this->helpToolStripMenuItem->Text = L"Help";
 			// 
-			// saveToolStripMenuItem
+			// openFileDialog1
 			// 
-			this->saveToolStripMenuItem->Name = L"saveToolStripMenuItem";
-			this->saveToolStripMenuItem->Size = System::Drawing::Size(152, 22);
-			this->saveToolStripMenuItem->Text = L"Save ";
-			// 
-			// exitToolStripMenuItem
-			// 
-			this->exitToolStripMenuItem->Name = L"exitToolStripMenuItem";
-			this->exitToolStripMenuItem->Size = System::Drawing::Size(152, 22);
-			this->exitToolStripMenuItem->Text = L"Exit";
+			this->openFileDialog1->FileName = L"openFileDialog";
 			// 
 			// MyForm
 			// 
@@ -290,6 +288,7 @@ namespace TextBox {
 			this->Controls->Add(this->menuStrip1);
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"MyForm";
+			this->Text = L"বাংলা পদ-বিশ্লেষক";
 			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->menuStrip1->ResumeLayout(false);
@@ -400,7 +399,7 @@ namespace TextBox {
 				if (ischeckfinished)
 					return true;
 
-				lastTextBox->Text += gcnew String(current.c_str()) + "\r\n";
+				this->lastTextBox->Text += gcnew String(current.c_str()) + "\r\n";
 				string term = "";
 
 				// Calculation of dividing the first symbol
@@ -726,12 +725,12 @@ namespace TextBox {
 					if (temp[0] >= 'a' && temp[0] <= 'z')
 					{
 
-						lastTextBox->Text += gcnew String(temp.c_str());
-						lastTextBox->Text += gcnew String(grammer[idx].c_str()) + "\r\n";
+						this->lastTextBox->Text += gcnew String(temp.c_str());
+						this->lastTextBox->Text += gcnew String(grammer[idx].c_str()) + "\r\n";
 						if (temp != grammer[idx] || idx >= (int)grammer.size())
 						{
 
-							lastTextBox->Text += "  " + "Sentence is not Accepted";
+							this->lastTextBox->Text += "  " + "Sentence is not Accepted";
 							return;
 						}
 						else
@@ -748,7 +747,7 @@ namespace TextBox {
 
 						if (parseTable[nonIdx][terIdx].size() == 0)//Empty of the parsing table 
 						{
-							lastTextBox->Text += "  " + "Sentence is not Accepted";
+							this->lastTextBox->Text += "  " + "Sentence is not Accepted";
 							return;
 						}
 
@@ -766,7 +765,7 @@ namespace TextBox {
 					}
 
 				}
-				lastTextBox->Text += " Sentence is Accepted!";
+				this->lastTextBox->Text += " Sentence is Accepted!";
 
 
 	}
@@ -860,7 +859,7 @@ namespace TextBox {
 
 			   words->Clear;
 
-			   String ^ inputText = mainTextBox->Text;
+			   String ^ inputText = this->mainTextBox->Text;
 
 			   String^ lineEndSymbol = "।";
 
@@ -923,7 +922,7 @@ namespace TextBox {
 					   if (Found)
 					   {
 						   it = hash.find(compString);
-						   lastTextBox->Text += " " + gcnew String((it->second).c_str());
+						   this->lastTextBox->Text += " " + gcnew String((it->second).c_str());
 						   grammerWords[i++] = gcnew String((it->second).c_str());
 						   continue;
 					   }
@@ -936,7 +935,7 @@ namespace TextBox {
 					   //newForm->Close();
 					   if (returnStringFromAddingPosForm.size() != 0)
 					   {
-						   lastTextBox->Text += " " + gcnew String(returnStringFromAddingPosForm.c_str());
+						   this->lastTextBox->Text += " " + gcnew String(returnStringFromAddingPosForm.c_str());
 						   grammerWords[i++] = gcnew String(returnStringFromAddingPosForm.c_str());
 
 						   hash[index] = returnStringFromAddingPosForm;
@@ -946,7 +945,7 @@ namespace TextBox {
 						   continue;
 					   }
 
-					   lastTextBox->Text += str + " not found :( " + "\r\n";
+					   this->lastTextBox->Text += str + " not found :( " + "\r\n";
 
 					   notFound = true;
 					   //return;
@@ -954,7 +953,7 @@ namespace TextBox {
 				   }
 				   else
 				   {
-					   lastTextBox->Text += " " + gcnew String((it->second).c_str());
+					   this->lastTextBox->Text += " " + gcnew String((it->second).c_str());
 					   grammerWords[i++] = gcnew String((it->second).c_str());
 				   }
 
@@ -980,7 +979,7 @@ namespace TextBox {
 
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
 				 readBivokti();
-				 Timer timer;
+				 userTimer timer;
 				 timer.start();
 				 xmlReadFunction();
 
@@ -988,11 +987,11 @@ namespace TextBox {
 				 makeCnfTable();
 				 double timeElapsed = timer.elapsedTime();
 
-				 lastTextBox->Text = timeElapsed.ToString();
+				 this->lastTextBox->Text = timeElapsed.ToString();
 	}
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 
-				 lastTextBox->Text = "";
+				 this->lastTextBox->Text = "";
 				 tot_line = 0;
 				 grammer.clear();
 				 notFound = false;
@@ -1010,7 +1009,7 @@ namespace TextBox {
 				  } */
 				 if (!notFound)
 				 {
-					 lastTextBox->Text = "";
+					 this->lastTextBox->Text = "";
 
 					 predictiveParsingAlgorithm();
 				 }
@@ -1020,21 +1019,21 @@ namespace TextBox {
 				 grammer.clear();
 				 notFound = false;
 
-				 lastTextBox->Text = "";
+				 this->lastTextBox->Text = "";
 				 splitInputText();
 				 if (!notFound)
 				 {
 					 ischeckfinished = false;
 
-					 lastTextBox->Text = "";
+					 this->lastTextBox->Text = "";
 					 bool ret = npdaAlgorithm(0, "S");
 
 					 if (ischeckfinished)
 					 {
-						 lastTextBox->Text += "Sentence is Accepted";
+						 this->lastTextBox->Text += "Sentence is Accepted";
 					 }
 					 else
-						 lastTextBox->Text += "Sentence is not Accepted";
+						 this->lastTextBox->Text += "Sentence is not Accepted";
 				 }
 	}
 	private: System::Void exitButton_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -1043,6 +1042,36 @@ namespace TextBox {
 	private: System::Void headingLabel_Click(System::Object^  sender, System::EventArgs^  e) {
 	}
 
-	};
+	private: System::Void openFileToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+
+				 Stream ^ fileStream;
+
+				 OpenFileDialog ^ fileDialog = gcnew OpenFileDialog;
+				 fileDialog->ShowHelp = true;
+
+				 if (fileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+				 {
+					 if ((fileStream = fileDialog->OpenFile()) != nullptr)
+					 {
+						 String ^ filename = fileDialog->InitialDirectory + fileDialog->FileName;
+
+						 StreamReader^ reader = File::OpenText(filename);
+						 String^ readString;
+
+						 while ((readString = reader->ReadLine()) != nullptr)
+						 {
+							 mainTextBox->Text += readString;
+						 }
+						 reader->Close();
+
+						 fileStream->Close();
+					 }
+				 }
+	}
+private: System::Void aboutToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			 aboutForm ^ aboutform = gcnew aboutForm();
+			 aboutform->Show();
+}
+};
 
 }

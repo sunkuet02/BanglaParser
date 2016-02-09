@@ -9,6 +9,7 @@
 #if !defined(_MARKUP_H_INCLUDED_)
 #define _MARKUP_H_INCLUDED_
 
+#include <ctime>
 #include <stdlib.h>
 #include <string.h> // memcpy, memset, strcmp...
 
@@ -470,6 +471,27 @@ protected:
 	MCD_STR x_GetElemContent( int iPos ) const;
 	bool x_SetElemContent( MCD_PCSZ szContent );
 	void x_DocChange( int nLeft, int nReplace, const MCD_STR& strInsert );
+};
+
+class userTimer
+{
+private:
+	double begTime;
+public:
+	void start()
+	{
+		begTime = clock();
+	}
+
+	double elapsedTime()
+	{
+		return ((double)clock() - begTime) /1000.0;
+	}
+
+	bool isTimeout(double seconds)
+	{
+		return seconds >= elapsedTime();
+	}
 };
 
 #endif // !defined(_MARKUP_H_INCLUDED_)

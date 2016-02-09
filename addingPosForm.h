@@ -142,16 +142,6 @@ namespace TextBox {
 			this->btnSave->UseVisualStyleBackColor = true;
 			this->btnSave->Click += gcnew System::EventHandler(this, &addingPosForm::btnSave_Click);
 			// 
-			// comboBox
-			// 
-			comboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			comboBox->FormattingEnabled = true;
-			comboBox->Items->AddRange(gcnew cli::array< System::Object^  >(6) { L"noun", L"pron", L"verb", L"adv", L"adj", L"conj" });
-			comboBox->Location = System::Drawing::Point(247, 35);
-			comboBox->Name = L"comboBox";
-			comboBox->Size = System::Drawing::Size(121, 21);
-			comboBox->TabIndex = 2;
-			// 
 			// lblMsg
 			// 
 			this->lblMsg->AutoSize = true;
@@ -163,6 +153,16 @@ namespace TextBox {
 			this->lblMsg->Size = System::Drawing::Size(41, 13);
 			this->lblMsg->TabIndex = 4;
 			this->lblMsg->Text = L"label1";
+			// 
+			// comboBox
+			// 
+			comboBox->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+			comboBox->FormattingEnabled = true;
+			comboBox->Items->AddRange(gcnew cli::array< System::Object^  >(6) { L"noun", L"pron", L"verb", L"adv", L"adj", L"conj" });
+			comboBox->Location = System::Drawing::Point(247, 35);
+			comboBox->Name = L"comboBox";
+			comboBox->Size = System::Drawing::Size(121, 21);
+			comboBox->TabIndex = 2;
 			// 
 			// addingPosForm
 			// 
@@ -177,7 +177,7 @@ namespace TextBox {
 			this->Controls->Add(this->lblText);
 			this->Name = L"addingPosForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
-			this->Text = L"addingPosForm";
+			this->Text = L"Add POS";
 			this->Load += gcnew System::EventHandler(this, &addingPosForm::addingPosForm_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -186,17 +186,17 @@ namespace TextBox {
 #pragma endregion
 		
 	private: System::Void addingPosForm_Load(System::Object^  sender, System::EventArgs^  e) {
-				 lblMsg->Hide();
+				 this->lblMsg->Hide();
 
-				 lblText->Text = "The word " + receivedString + " not Found. Do you want to add this to POS Tagger ? ";
-				 lblShowPosName->Text = receivedString;
+				 this->lblText->Text = "The word " + receivedString + " not Found. Do you want to add this to POS Tagger ? ";
+				 this->lblShowPosName->Text = receivedString;
 
 	}
 	private: System::Void btnSave_Click(System::Object^  sender, System::EventArgs^  e) {
 				 
 				 if (comboBox->Text == "")
 				 {
-					 lblMsg->Text = "Please, Select an Item";
+					 this->lblMsg->Text = "Please, Select an Item";
 					 lblMsg->Show();
 				 }
 				 else
@@ -222,7 +222,6 @@ namespace TextBox {
 				 
 	}
 	private: System::Void btnCancel_Click(System::Object^  sender, System::EventArgs^  e) {
-				 comboBox->Text = "";
 				 this->Close();
 	}
 	};
