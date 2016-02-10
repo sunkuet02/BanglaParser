@@ -1,26 +1,25 @@
-﻿Build started 10-Feb-16 2:24:42 AM.
+﻿Build started 10-Feb-16 1:54:15 PM.
      1>Project "C:\Users\Sun\Documents\Visual Studio 2013\Projects\BanglaParser\TextBox.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /AI"C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral" /Zi /clr /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /D _MBCS /D MARKUP_STL /Gm- /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\mscorlib.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt /clr:nostdlib addingPosForm.cpp MyForm.cpp
-         addingPosForm.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /AI"C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral" /Zi /clr /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /D _MBCS /D MARKUP_STL /Gm- /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\mscorlib.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt /clr:nostdlib MyForm.cpp
          MyForm.cpp
      1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(864): warning C4566: character represented by universal-character-name '\u0964' cannot be represented in the current code page (1252)
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(349): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(352): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(367): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(350): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(353): warning C4018: '<' : signed/unsigned mismatch
      1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(368): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(424): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(459): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(488): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(497): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(511): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(529): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(539): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(561): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(572): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(591): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(594): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(603): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(369): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(425): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(460): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(489): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(498): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(512): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(530): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(540): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(562): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(573): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(592): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(595): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(604): warning C4018: '<' : signed/unsigned mismatch
      1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(860): warning C4551: function call missing argument list
      1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(904): warning C4018: '<' : signed/unsigned mismatch
      1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(911): warning C4018: '<' : signed/unsigned mismatch
@@ -31,8 +30,7 @@
                  c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(904) : definition of 'i' ignored
                  c:\users\sun\documents\visual studio 2013\projects\banglaparser\MyForm.h(876) : definition of 'i' used
      1>MyForm.cpp(17): warning C4829: Possibly incorrect parameters to function main. Consider 'int main(Platform::Array<Platform::String^>^ argv)'
-         Generating Code...
-     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\myform.h(455): warning C4715: 'TextBox::MyForm::npdaAlgorithm' : not all control paths return a value
+     1>c:\users\sun\documents\visual studio 2013\projects\banglaparser\myform.h(456): warning C4715: 'TextBox::MyForm::npdaAlgorithm' : not all control paths return a value
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Sun\Documents\Visual Studio 2013\Projects\BanglaParser\Debug\TextBox.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /ASSEMBLYRESOURCE:Debug\TextBox.aboutForm.resources /ASSEMBLYRESOURCE:Debug\TextBox.addingPosForm.resources /ASSEMBLYRESOURCE:Debug\TextBox.MyForm.resources /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Sun\Documents\Visual Studio 2013\Projects\BanglaParser\Debug\TextBox.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"main" /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Sun\Documents\Visual Studio 2013\Projects\BanglaParser\Debug\TextBox.lib" /MACHINE:X86 Debug\aboutForm.obj
          Debug\addingPosForm.obj
@@ -43,4 +41,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.60
+Time Elapsed 00:00:03.12

@@ -248,8 +248,9 @@ namespace TextBox {
 			// viewPOSToolStripMenuItem
 			// 
 			this->viewPOSToolStripMenuItem->Name = L"viewPOSToolStripMenuItem";
-			this->viewPOSToolStripMenuItem->Size = System::Drawing::Size(124, 22);
+			this->viewPOSToolStripMenuItem->Size = System::Drawing::Size(152, 22);
 			this->viewPOSToolStripMenuItem->Text = L"View POS";
+			this->viewPOSToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::viewPOSToolStripMenuItem_Click);
 			// 
 			// addPOSToolStripMenuItem
 			// 
@@ -785,7 +786,6 @@ namespace TextBox {
 
 				grammer.push_back("$");
 
-
 	}
 
 	public: System::Void xmlReadFunction()  // This function reads data from xml file and save into two txt files
@@ -1044,6 +1044,8 @@ namespace TextBox {
 
 	private: System::Void openFileToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 
+				 mainTextBox->Text = "";
+
 				 Stream ^ fileStream;
 
 				 OpenFileDialog ^ fileDialog = gcnew OpenFileDialog;
@@ -1071,6 +1073,19 @@ namespace TextBox {
 private: System::Void aboutToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			 aboutForm ^ aboutform = gcnew aboutForm();
 			 aboutform->Show();
+}
+private: System::Void viewPOSToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			 
+			 splitInputText();
+
+			 lastTextBox->Text = "";
+			 for each(String ^ str in grammerWords)
+			 {
+				 if (str == nullptr) break;
+
+				 lastTextBox->Text += str + " ";
+
+			 }
 }
 };
 
