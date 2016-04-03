@@ -37,11 +37,15 @@ namespace TextBox {
 	vector<int>tot_word;
 	hash_map<wstring, string> hash;
 	hash_map<wstring, bool > bivoktiMap;
+	hash_map<wchar_t, int> delimiterMarker;
 	hash_map<wstring, string>::const_iterator it;
 	vector<string>splitgrammer[100][100];
 	vector<string>FIRST[100], FOLLOW[100];
 	vector<string>Nonterminal, terminal;
 	int totProduction[100];
+
+	int textMarker[1000005];
+	int totalSentences;
 
 
 	bool notFound = false;
@@ -50,7 +54,7 @@ namespace TextBox {
 	//
 	/// Timmer class 
 	//
-	
+
 
 
 	public ref class MyForm : public System::Windows::Forms::Form
@@ -303,8 +307,8 @@ namespace TextBox {
 
 		array<String^>^ grammerWords = gcnew array<String^>(110);
 
-		array<String^, 2>^ AllgrammerWords = gcnew array<String^, 2>(100, 100);
-
+		array<String^, 2>^ allGrammerWords = gcnew array<String^, 2>(100, 100);
+		String ^ showSentence;
 
 		array<String^>^ MainInput;
 
@@ -401,6 +405,7 @@ namespace TextBox {
 					return true;
 
 				this->lastTextBox->Text += gcnew String(current.c_str()) + "\r\n";
+				
 				string term = "";
 
 				// Calculation of dividing the first symbol
@@ -710,7 +715,7 @@ namespace TextBox {
 
 	}
 
-	public: void predictiveParsingAlgorithm()
+	public: bool predictiveParsingAlgorithm()
 	{
 				stack<string> st;
 
@@ -730,9 +735,7 @@ namespace TextBox {
 						this->lastTextBox->Text += gcnew String(grammer[idx].c_str()) + "\r\n";
 						if (temp != grammer[idx] || idx >= (int)grammer.size())
 						{
-
-							this->lastTextBox->Text += "  " + "Sentence is not Accepted";
-							return;
+							return false;
 						}
 						else
 						{
@@ -748,8 +751,7 @@ namespace TextBox {
 
 						if (parseTable[nonIdx][terIdx].size() == 0)//Empty of the parsing table 
 						{
-							this->lastTextBox->Text += "  " + "Sentence is not Accepted";
-							return;
+							return false;
 						}
 
 						for (int i = parseTable[nonIdx][terIdx].size() - 1; i >= 0; i--)
@@ -766,7 +768,7 @@ namespace TextBox {
 					}
 
 				}
-				this->lastTextBox->Text += " Sentence is Accepted!";
+				return true;
 
 
 	}
@@ -786,6 +788,28 @@ namespace TextBox {
 
 				grammer.push_back("$");
 
+	}
+	public: string checkWordWithBivokti(wstring index)
+	{
+				wstring compString = L"";
+				for (int i = 0; i < index.size(); i++)
+				{
+					compString += index[i];
+
+					if (hash.find(compString) != hash.end())
+					{
+						wstring bivoktiString = L"";
+
+						for (int j = i + 1; j < index.size(); j++)
+							bivoktiString += index[j];
+
+						if (bivoktiMap.find(bivoktiString) != bivoktiMap.end())
+						{
+							return (hash.find(compString)->second).c_str();
+						}
+					}
+				}
+				return "";
 	}
 
 	public: System::Void xmlReadFunction()  // This function reads data from xml file and save into two txt files
@@ -818,7 +842,7 @@ namespace TextBox {
 					}
 
 				}
-				
+
 				XmlTextReader ^ xmlReader = gcnew XmlTextReader("temp/generatedXml.xml");
 				Index = L"";
 				Key = "";
@@ -845,7 +869,7 @@ namespace TextBox {
 					}
 
 				}
-				
+
 				xmlReader->Close();
 				return;
 
@@ -856,111 +880,228 @@ namespace TextBox {
 	{
 
 			   Array::Clear(grammerWords, 0, grammerWords->Length);
+			   
+			   for (int i = 0; i <= 100; i++)
+			   {
+				   Array::Clear(allGrammerWords, 0, allGrammerWords->Length);
+			   }
 
-			   words->Clear;
 
 			   String ^ inputText = this->mainTextBox->Text;
+			   wstring wInputText = marshal_as<std::wstring>(inputText);
 
 			   String^ lineEndSymbol = "।";
 
+			   /*These are the delimiters
+			   */
+			   delimiterMarker[L' '] = 1;
+			   delimiterMarker[L':'] = 1;
+			   delimiterMarker[L','] = 1;
+			   delimiterMarker[L';'] = 1;
+
+			   /*these are sentence breaker*/
+			   delimiterMarker[L'।'] = 2;
+			   delimiterMarker[L'?'] = 2;
+
+			   wstring curString;
+			   int indx = 0;
+			   totalSentences = 0;
 
 
-			   String^ delimStr = ", .:\t\n";
-
-			   array<Char>^ delimiter = delimStr->ToCharArray();
-
-
-
-			   words = inputText->Split(delimiter);
-
-			   int i = 0;
-
-			   for each (String ^ str in words)
+			   for (int i = 0; i < wInputText.size(); i++)
 			   {
-				   if (str == " ") continue;
-				   /*string temp = marshal_as<std::string>(str);
-				   if (temp== "\u0964")
+				   // mainTextBox->Text += gcnew String(wInputText[i].ToString()) +" " + delimiterMarker[wInputText[i]].ToString() + "\t\n";
+
+				   if (delimiterMarker.find(wInputText[i]) == delimiterMarker.end())
 				   {
-				   mainTextBox->Text += " break hoise";
-				   tot_word.push_back(i);
-				   tot_line++, i = 0;
-				   continue;
-				   //break;
+					   //mainTextBox->Text += gcnew String(wInputText[i].ToString()) + "\n";
+					   curString.push_back(wInputText[i]);
 				   }
-				   */
-
-				   // XmlNodeList^ elemList = doc->GetElementsByTagName(str);
-
-				   //mainTextBox->Text += str + " ";
-
-				   wstring index = marshal_as<std::wstring>(str);
-
-				   it = hash.find(index);
-				   if (it == hash.end())
+				   else if (delimiterMarker[wInputText[i]] == 1)
 				   {
-					   wstring compString = L"";
-					   bool Found = false;
-
-					   for (int i = 0; i < index.size(); i++)
-					   {
-						   compString += index[i];
-						   if (hash.find(compString) != hash.end())
-						   {
-							   wstring bivoktiString = L"";
-
-							   for (int j = i + 1; j < index.size(); j++)
-								   bivoktiString += index[j];
-
-							   if (bivoktiMap.find(bivoktiString) != bivoktiMap.end())
-							   {
-								   Found = true;
-								   break;
-							   }
-						   }
-					   }
-
-					   if (Found)
-					   {
-						   it = hash.find(compString);
-						   this->lastTextBox->Text += " " + gcnew String((it->second).c_str());
-						   grammerWords[i++] = gcnew String((it->second).c_str());
-						   continue;
-					   }
-
-					   addingPosForm ^ newForm = gcnew addingPosForm(str);
-					   newForm->ShowDialog();
-
-					   string returnStringFromAddingPosForm = marshal_as<std::string>(newForm->comboBox->Text);
-
-					   //newForm->Close();
-					   if (returnStringFromAddingPosForm.size() != 0)
-					   {
-						   this->lastTextBox->Text += " " + gcnew String(returnStringFromAddingPosForm.c_str());
-						   grammerWords[i++] = gcnew String(returnStringFromAddingPosForm.c_str());
-
-						   hash[index] = returnStringFromAddingPosForm;
-
-						   //lastTextBox->Text += gcnew String( hash[index].c_str()) + " ";
-
-						   continue;
-					   }
-
-					   this->lastTextBox->Text += str + " not found :( " + "\r\n";
-
-					   notFound = true;
-					   //return;
-
+					   //mainTextBox->Text += gcnew String(curString.c_str()) + "\t\n";
+					   if (curString.size() > 0)
+						   allGrammerWords[totalSentences, indx++] = gcnew String(curString.c_str());
+					   curString.clear();
 				   }
-				   else
+				   else if (delimiterMarker[wInputText[i]] == 2)
 				   {
-					   this->lastTextBox->Text += " " + gcnew String((it->second).c_str());
-					   grammerWords[i++] = gcnew String((it->second).c_str());
+					   if (curString.size())
+					   {
+						   allGrammerWords[totalSentences, indx++] = gcnew String(curString.c_str());
+						   curString.clear();
+					   }
+					   totalSentences++;
+					   indx = 0;
 				   }
-
-
+			   }
+			   // if more remains
+			   if (curString.size())
+			   {
+				   allGrammerWords[totalSentences, indx++] = gcnew String(curString.c_str());
+				   curString.clear();
+			   }
+			   if (indx > 0)
+			   {
+				   totalSentences++;
+				   indx = 0;
 			   }
 
-			   getGrammer();
+
+			   int i = 0;
+			   for (int firstIndex = 0; firstIndex < totalSentences; firstIndex++)
+			   {
+				   for (int innerIndex = 0;; innerIndex++)
+				   {
+					   String ^ currentWord = allGrammerWords[firstIndex, innerIndex];
+
+					   if (currentWord == nullptr)
+					   {
+						   break;
+					   }
+
+
+					   // ager motow kaj
+
+					   wstring index = marshal_as<std::wstring>(currentWord);
+
+					   //this->lastTextBox->Text += " " + gcnew String(index.c_str()) + " ";
+
+					   it = hash.find(index);
+					   if (it == hash.end())
+					   {
+						   if (checkWordWithBivokti(index) != "")
+						   {
+
+							   //it = hash.find(compString);
+							   // this->lastTextBox->Text += " " + gcnew String((it->second).c_str());
+							   // grammerWords[i++] = gcnew String((it->second).c_str());
+
+							   continue;
+						   }
+
+						   addingPosForm ^ newForm = gcnew addingPosForm(currentWord);
+						   newForm->ShowDialog();
+
+						   string returnStringFromAddingPosForm = marshal_as<std::string>(newForm->comboBox->Text);
+
+						   //newForm->Close();
+						   if (returnStringFromAddingPosForm.size() != 0)
+						   {
+
+							   //this->lastTextBox->Text += " " + gcnew String(returnStringFromAddingPosForm.c_str());
+							   //grammerWords[i++] = gcnew String(returnStringFromAddingPosForm.c_str());
+
+							   hash[index] = returnStringFromAddingPosForm;
+
+							   //lastTextBox->Text += gcnew String( hash[index].c_str()) + " ";
+
+							   continue;
+						   }
+
+						   //this->lastTextBox->Text += currentWord + "not found :(" ;
+
+						   notFound = true;
+						   //return;
+
+					   }
+					   else
+					   {
+						   //this->lastTextBox->Text += " " + gcnew String((it->second).c_str());
+						   //grammerWords[i++] = gcnew String((it->second).c_str());
+					   }
+
+				   }
+			   }
+
+			   /*
+			   for each (String ^ str in words)
+			   {
+			   if (str == " ") continue;
+			   /*string temp = marshal_as<std::string>(str);
+			   if (temp== "\u0964")
+			   {
+			   mainTextBox->Text += " break hoise";
+			   tot_word.push_back(i);
+			   tot_line++, i = 0;
+			   continue;
+			   //break;
+			   }
+			   */
+
+			   // XmlNodeList^ elemList = doc->GetElementsByTagName(str);
+
+			   //mainTextBox->Text += str + " ";
+			   /*
+				  wstring index = marshal_as<std::wstring>(str);
+
+				  it = hash.find(index);
+				  if (it == hash.end())
+				  {
+				  wstring compString = L"";
+				  bool Found = false;
+
+				  for (int i = 0; i < index.size(); i++)
+				  {
+				  compString += index[i];
+				  if (hash.find(compString) != hash.end())
+				  {
+				  wstring bivoktiString = L"";
+
+				  for (int j = i + 1; j < index.size(); j++)
+				  bivoktiString += index[j];
+
+				  if (bivoktiMap.find(bivoktiString) != bivoktiMap.end())
+				  {
+				  Found = true;
+				  break;
+				  }
+				  }
+				  }
+
+				  if (Found)
+				  {
+				  it = hash.find(compString);
+				  this->lastTextBox->Text += " " + gcnew String((it->second).c_str());
+				  grammerWords[i++] = gcnew String((it->second).c_str());
+				  continue;
+				  }
+
+				  addingPosForm ^ newForm = gcnew addingPosForm(str);
+				  newForm->ShowDialog();
+
+				  string returnStringFromAddingPosForm = marshal_as<std::string>(newForm->comboBox->Text);
+
+				  //newForm->Close();
+				  if (returnStringFromAddingPosForm.size() != 0)
+				  {
+				  this->lastTextBox->Text += " " + gcnew String(returnStringFromAddingPosForm.c_str());
+				  grammerWords[i++] = gcnew String(returnStringFromAddingPosForm.c_str());
+
+				  hash[index] = returnStringFromAddingPosForm;
+
+				  //lastTextBox->Text += gcnew String( hash[index].c_str()) + " ";
+
+				  continue;
+				  }
+
+				  this->lastTextBox->Text += str + " not found :( " + "\r\n";
+
+				  notFound = true;
+				  //return;
+
+				  }
+				  else
+				  {
+				  this->lastTextBox->Text += " " + gcnew String((it->second).c_str());
+				  grammerWords[i++] = gcnew String((it->second).c_str());
+				  }
+
+
+				  }
+				  */
+
+			   // getGrammer();
 	}
 
 	private: void readBivokti(){
@@ -989,38 +1130,104 @@ namespace TextBox {
 
 				 this->lastTextBox->Text = timeElapsed.ToString();
 	}
+
+	public: bool checkIfRunAlgorithm(int firstIndex)
+	{
+				Array::Clear(grammerWords, 0, grammerWords->Length);
+
+				showSentence = "";
+
+				for (int innerIndex = 0;; innerIndex++)
+				{
+					String ^ currentWord = allGrammerWords[firstIndex, innerIndex];
+
+					if (currentWord == nullptr)
+					{
+						break;
+					}
+					showSentence = showSentence + " " + currentWord;
+					wstring current = marshal_as<std::wstring>(currentWord);
+					it = hash.find(current);
+					if (it == hash.end())
+					{
+						string ret = checkWordWithBivokti(current);
+						if (ret == "")
+						{
+							lastTextBox->Text += currentWord + " Not found " + "\r\n";
+							
+							return false;
+						}
+						else
+						{
+							grammerWords[innerIndex] = gcnew String(ret.c_str());
+						}
+					}
+					else
+					{
+						grammerWords[innerIndex] = gcnew String((it->second).c_str());
+					}
+				}
+				
+				return true;
+
+	}
+
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 
 				 this->lastTextBox->Text = "";
-				 tot_line = 0;
 				 grammer.clear();
 				 notFound = false;
 				 splitInputText();
-				 /*for (int i = 0; i < tot_line; i++)
-				  {
-				  Array::Clear(grammerWords, 0, grammerWords->Length);
-				  for (int j = 0; j < tot_word[i]; j++)
-				  {
-				  //mainTextBox->Text += " " + AllgrammerWords[i, j];
-				  grammerWords[j] = AllgrammerWords[i, j];
-				  }
-				  getGrammer();
-				  predictiveParsingAlgorithm();
-				  } */
+				 for (int firstIndex = 0; firstIndex < totalSentences; firstIndex++)
+				 {
+					 bool result;
+					 if (checkIfRunAlgorithm(firstIndex))
+					 {
+						 getGrammer();
+						 result = predictiveParsingAlgorithm();
+					 }
+					 else
+					 {
+						 result = false;
+					 }
+
+					 if (result)
+					 {
+						 lastTextBox->Text += showSentence + "-->" + "Accepted" + "\r\n";
+					 }
+					 else
+					 {
+						 lastTextBox->Text += showSentence + "-->" + "Not Accepted" + "\r\n";
+					 }
+
+
+				 }
+
+				 /*
+				 for (int i = 0; i < totalSentences; i++)
+				 {
+				 Array::Clear(grammerWords, 0, grammerWords->Length);
+				 for (int j = 0; j < tot_word[i]; j++)
+				 {
+				 //mainTextBox->Text += " " + allGrammerWords[i, j];
+				 grammerWords[j] = allGrammerWords[i, j];
+				 }
+				 getGrammer();
+				 predictiveParsingAlgorithm();
+				 }
 				 if (!notFound)
 				 {
-					 this->lastTextBox->Text = "";
+				 this->lastTextBox->Text = "";
 
-					 predictiveParsingAlgorithm();
-				 }
+				 predictiveParsingAlgorithm();
+				 }*/
 
 	}
 	private: System::Void button1_Click_1(System::Object^  sender, System::EventArgs^  e) {
-				 grammer.clear();
-				 notFound = false;
 
 				 this->lastTextBox->Text = "";
 				 splitInputText();
+				 /*
 				 if (!notFound)
 				 {
 					 ischeckfinished = false;
@@ -1035,6 +1242,35 @@ namespace TextBox {
 					 else
 						 this->lastTextBox->Text += "Sentence is not Accepted";
 				 }
+				 */
+				 for (int firstIndex = 0; firstIndex < totalSentences; firstIndex++)
+				 {
+					 bool result;
+					 ischeckfinished = false;
+
+					 if (checkIfRunAlgorithm(firstIndex))
+					 {
+						 ischeckfinished = false;
+						 getGrammer();
+						 result = npdaAlgorithm(0, "S");
+					 }
+					 else
+					 {
+						 result = false;
+					 }
+
+					 if (ischeckfinished)
+					 {
+						 lastTextBox->Text += showSentence + "-->" + "Accepted" + "\r\n";
+					 }
+					 else
+					 {
+						 lastTextBox->Text += showSentence + "-->" + "Not Accepted" + "\r\n";
+					 }
+
+
+				 }
+
 	}
 	private: System::Void exitButton_Click(System::Object^  sender, System::EventArgs^  e) {
 				 this->Close();
@@ -1070,23 +1306,39 @@ namespace TextBox {
 					 }
 				 }
 	}
-private: System::Void aboutToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-			 aboutForm ^ aboutform = gcnew aboutForm();
-			 aboutform->Show();
-}
-private: System::Void viewPOSToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-			 
-			 splitInputText();
+	private: System::Void aboutToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+				 aboutForm ^ aboutform = gcnew aboutForm();
+				 aboutform->Show();
+	}
+	private: System::Void viewPOSToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 
-			 lastTextBox->Text = "";
-			 for each(String ^ str in grammerWords)
-			 {
-				 if (str == nullptr) break;
+				 splitInputText();
 
-				 lastTextBox->Text += str + " ";
+				 lastTextBox->Text = "";
+				 
+				 for (int i = 0; i < totalSentences; i++)
+				 {
+					 for (int inner = 0;; inner++)
+					 {
+						 String ^ curString = allGrammerWords[i, inner];
 
-			 }
-}
-};
+						 if (curString == nullptr) break;
+						 
+						 wstring current = marshal_as<std::wstring>(curString);
+						 it = hash.find(current);
+						 if (it == hash.end())
+						 {
+							 lastTextBox->Text += " *"; 
+						 }
+						 else
+						 {
+							 lastTextBox->Text += " " + gcnew String(it->second.c_str());
+						 }
+					 }
+
+					 lastTextBox->Text += ". ";
+				 }
+	}
+	};
 
 }

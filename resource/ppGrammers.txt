@@ -1,13 +1,23 @@
 S-NP VP
-NP-noun NP1|pron NP2|adv noun|AP
-NP1-conj noun|#
+NP-noun NP1|pron NP2|adv noun|AP|verb noun
+NP1-conj noun|noun adv|adv|#
 NP2-conj pron|#
 AP-adj AP1
-AP1-noun|adj AP2|pron|conj AP|#
+AP1-noun|adj AP2|pron|conj AP|adv pron|#
 AP2-verb|#
 VP-noun VP1|verb VP2|AP VP3|pron verb
-VP1-verb VP4|adj noun
-VP2-verb|#
-VP3-noun|verb|adj VP5|#
+VP1-verb VP4|adj noun|pron VP2
+VP2-verb|noun VP6|#
+VP3-noun|verb|adj VP5|adv VP9|#
 VP4-verb|#
 VP5-verb|adj verb
+VP6-verb VP7|adj VP7
+VP7-noun VP8|#
+VP8-noun VP9|adv VP9|verb VP15|#
+VP9-noun VP10|#
+VP10-verb VP14|#
+VP11-noun VP12
+VP12-pron VP13
+VP13-noun verb
+VP14-adj|VP11
+VP15-adj adj
