@@ -1328,7 +1328,17 @@ namespace TextBox {
 						 it = hash.find(current);
 						 if (it == hash.end())
 						 {
-							 lastTextBox->Text += " *"; 
+							 string ret = checkWordWithBivokti(current);
+
+							 if (ret == "")
+							 {
+								 lastTextBox->Text += " *";
+							 }
+							 else
+							 {
+								 lastTextBox->Text += " " + gcnew String(ret.c_str());
+							 }
+							 
 						 }
 						 else
 						 {
