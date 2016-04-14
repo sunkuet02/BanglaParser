@@ -1,23 +1,46 @@
 S-NP VP
-NP-noun NP1|pron NP2|adv noun|AP|verb noun
-NP1-conj noun|noun adv|adv|#
-NP2-conj pron|#
+NP-noun NP1|pron NP2|adv NP9|AP|verb NP16
+NP1-conj noun|noun NP3|adv|#
+NP2-conj pron|adv|#
 AP-adj AP1
 AP1-noun|adj AP2|pron|conj AP|adv pron|#
 AP2-verb|#
-VP-noun VP1|verb VP2|AP VP3|pron verb
-VP1-verb VP4|adj noun|pron VP2
-VP2-verb|noun VP6|#
-VP3-noun|verb|adj VP5|adv VP9|#
-VP4-verb|#
+VP-noun VP1|verb VP2|AP VP3|pron VP17|adv VP9|#
+VP1-verb VP4|adj noun|pron VP2|adv VP2
+VP2-verb VP16|noun VP6|adj VP18|adv VP3|pron|#
+VP3-noun NP3|verb|adj VP5|adv VP9|#
+VP4-verb|noun|#
 VP5-verb|adj verb
 VP6-verb VP7|adj VP7
 VP7-noun VP8|#
 VP8-noun VP9|adv VP9|verb VP15|#
-VP9-noun VP10|#
-VP10-verb VP14|#
+VP9-noun VP10|verb|conj adv
+VP10-verb VP14|noun verb|#
 VP11-noun VP12
 VP12-pron VP13
 VP13-noun verb
-VP14-adj|VP11
+VP14-adj|verb noun|VP11
 VP15-adj adj
+VP16-verb NP8|adv adv|#
+VP17-verb|noun VP1
+VP18-adj VP19|adv NP21
+VP19-adv NP12
+NP3-adv|conj NP4|#
+NP4-noun NP5
+NP5-adv NP6|verb VP5
+NP6-adj NP7
+NP7-adv NP8
+NP8-adv noun
+NP9-noun NP10
+NP10-noun NP11|#
+NP11-noun|#
+NP12-noun NP13
+NP13-adj NP14
+NP14-adv NP15
+NP15-noun VP
+NP16-noun|verb NP17
+NP17-noun NP18
+NP18-noun NP19
+NP19-conj NP20
+NP20-noun noun
+NP21-noun verb
