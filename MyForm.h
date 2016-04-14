@@ -95,13 +95,18 @@ namespace TextBox {
 	private: System::Windows::Forms::ToolStripMenuItem^  fileToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  saveToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  exitToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  viewToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  viewPOSToolStripMenuItem;
+
+
 	private: System::Windows::Forms::ToolStripMenuItem^  addPOSToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  aboutToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  helpToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  openFileToolStripMenuItem;
 	private: System::Windows::Forms::OpenFileDialog^  openFileDialog1;
+	private: System::Windows::Forms::Button^  button2;
+	private: System::Windows::Forms::TextBox^  boxPreporcessing;
+	private: System::Windows::Forms::TextBox^  boxExecution;
+	private: System::Windows::Forms::Label^  label1;
+	private: System::Windows::Forms::Label^  label2;
 
 
 
@@ -130,12 +135,15 @@ namespace TextBox {
 			this->openFileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->saveToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->exitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->viewToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->viewPOSToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->addPOSToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->boxPreporcessing = (gcnew System::Windows::Forms::TextBox());
+			this->boxExecution = (gcnew System::Windows::Forms::TextBox());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
@@ -144,29 +152,31 @@ namespace TextBox {
 			// 
 			this->mainTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->mainTextBox->Location = System::Drawing::Point(12, 101);
+			this->mainTextBox->Location = System::Drawing::Point(0, 169);
 			this->mainTextBox->Multiline = true;
 			this->mainTextBox->Name = L"mainTextBox";
-			this->mainTextBox->Size = System::Drawing::Size(255, 220);
+			this->mainTextBox->Size = System::Drawing::Size(294, 281);
 			this->mainTextBox->TabIndex = 0;
 			// 
 			// lastTextBox
 			// 
 			this->lastTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->lastTextBox->Location = System::Drawing::Point(397, 101);
+			this->lastTextBox->Location = System::Drawing::Point(455, 169);
 			this->lastTextBox->Multiline = true;
 			this->lastTextBox->Name = L"lastTextBox";
 			this->lastTextBox->ReadOnly = true;
 			this->lastTextBox->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
-			this->lastTextBox->Size = System::Drawing::Size(298, 220);
+			this->lastTextBox->Size = System::Drawing::Size(303, 281);
 			this->lastTextBox->TabIndex = 1;
 			// 
 			// sendButton
 			// 
-			this->sendButton->Location = System::Drawing::Point(273, 129);
+			this->sendButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->sendButton->Location = System::Drawing::Point(300, 198);
 			this->sendButton->Name = L"sendButton";
-			this->sendButton->Size = System::Drawing::Size(118, 23);
+			this->sendButton->Size = System::Drawing::Size(149, 34);
 			this->sendButton->TabIndex = 2;
 			this->sendButton->Text = L"Predictive Parse";
 			this->sendButton->UseVisualStyleBackColor = true;
@@ -174,7 +184,7 @@ namespace TextBox {
 			// 
 			// exitButton
 			// 
-			this->exitButton->Location = System::Drawing::Point(299, 333);
+			this->exitButton->Location = System::Drawing::Point(335, 450);
 			this->exitButton->Name = L"exitButton";
 			this->exitButton->Size = System::Drawing::Size(92, 23);
 			this->exitButton->TabIndex = 3;
@@ -184,9 +194,11 @@ namespace TextBox {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(273, 263);
+			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button1->Location = System::Drawing::Point(300, 389);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(122, 23);
+			this->button1->Size = System::Drawing::Size(149, 36);
 			this->button1->TabIndex = 5;
 			this->button1->Text = L"NPDA";
 			this->button1->UseVisualStyleBackColor = true;
@@ -195,21 +207,21 @@ namespace TextBox {
 			// pictureBox1
 			// 
 			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(249, 42);
+			this->pictureBox1->Location = System::Drawing::Point(291, 27);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(175, 39);
+			this->pictureBox1->Size = System::Drawing::Size(167, 39);
 			this->pictureBox1->TabIndex = 6;
 			this->pictureBox1->TabStop = false;
 			// 
 			// menuStrip1
 			// 
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
 				this->fileToolStripMenuItem,
-					this->viewToolStripMenuItem, this->addPOSToolStripMenuItem, this->aboutToolStripMenuItem, this->helpToolStripMenuItem
+					this->addPOSToolStripMenuItem, this->aboutToolStripMenuItem, this->helpToolStripMenuItem
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(707, 24);
+			this->menuStrip1->Size = System::Drawing::Size(758, 24);
 			this->menuStrip1->TabIndex = 7;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -242,20 +254,6 @@ namespace TextBox {
 			this->exitToolStripMenuItem->Size = System::Drawing::Size(124, 22);
 			this->exitToolStripMenuItem->Text = L"Exit";
 			// 
-			// viewToolStripMenuItem
-			// 
-			this->viewToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->viewPOSToolStripMenuItem });
-			this->viewToolStripMenuItem->Name = L"viewToolStripMenuItem";
-			this->viewToolStripMenuItem->Size = System::Drawing::Size(44, 20);
-			this->viewToolStripMenuItem->Text = L"View";
-			// 
-			// viewPOSToolStripMenuItem
-			// 
-			this->viewPOSToolStripMenuItem->Name = L"viewPOSToolStripMenuItem";
-			this->viewPOSToolStripMenuItem->Size = System::Drawing::Size(152, 22);
-			this->viewPOSToolStripMenuItem->Text = L"View POS";
-			this->viewPOSToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::viewPOSToolStripMenuItem_Click);
-			// 
 			// addPOSToolStripMenuItem
 			// 
 			this->addPOSToolStripMenuItem->Name = L"addPOSToolStripMenuItem";
@@ -279,11 +277,68 @@ namespace TextBox {
 			// 
 			this->openFileDialog1->FileName = L"openFileDialog";
 			// 
+			// button2
+			// 
+			this->button2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button2->Location = System::Drawing::Point(300, 300);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(149, 31);
+			this->button2->TabIndex = 8;
+			this->button2->Text = L"View POS";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &MyForm::viewPosButtonFunction);
+			// 
+			// boxPreporcessing
+			// 
+			this->boxPreporcessing->Location = System::Drawing::Point(0, 104);
+			this->boxPreporcessing->Multiline = true;
+			this->boxPreporcessing->Name = L"boxPreporcessing";
+			this->boxPreporcessing->ReadOnly = true;
+			this->boxPreporcessing->Size = System::Drawing::Size(294, 59);
+			this->boxPreporcessing->TabIndex = 9;
+			// 
+			// boxExecution
+			// 
+			this->boxExecution->Location = System::Drawing::Point(455, 104);
+			this->boxExecution->Multiline = true;
+			this->boxExecution->Name = L"boxExecution";
+			this->boxExecution->ReadOnly = true;
+			this->boxExecution->Size = System::Drawing::Size(303, 59);
+			this->boxExecution->TabIndex = 9;
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label1->Location = System::Drawing::Point(77, 88);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(118, 13);
+			this->label1->TabIndex = 10;
+			this->label1->Text = L"Preprocessing Time";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label2->Location = System::Drawing::Point(575, 88);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(94, 13);
+			this->label2->TabIndex = 10;
+			this->label2->Text = L"Execution Time";
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(707, 368);
+			this->ClientSize = System::Drawing::Size(758, 475);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->boxExecution);
+			this->Controls->Add(this->boxPreporcessing);
+			this->Controls->Add(this->button2);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->exitButton);
@@ -395,6 +450,10 @@ namespace TextBox {
 					ischeckfinished = true;
 					return true;
 				}
+				if (grammer[indx] == "$" && current.size() != 0)
+				{
+					return false;
+				}
 
 				else if (grammer[indx] != "$" && current.size() == 0)
 				{
@@ -405,7 +464,7 @@ namespace TextBox {
 					return true;
 
 				this->lastTextBox->Text += gcnew String(current.c_str()) + "\r\n";
-				
+
 				string term = "";
 
 				// Calculation of dividing the first symbol
@@ -880,7 +939,7 @@ namespace TextBox {
 	{
 
 			   Array::Clear(grammerWords, 0, grammerWords->Length);
-			   
+
 			   for (int i = 0; i <= 100; i++)
 			   {
 				   Array::Clear(allGrammerWords, 0, allGrammerWords->Length);
@@ -1123,10 +1182,17 @@ namespace TextBox {
 				 userTimer timer;
 				 timer.start();
 				 xmlReadFunction();
-
-				 genParseTable();
-				 makeCnfTable();
 				 double timeElapsed = timer.elapsedTime();
+
+				 this->boxPreporcessing->Text = "XML Preprocessing Time: " + timeElapsed.ToString()+"sec" + "\r\n";
+				 
+				 timer.start();
+				 genParseTable();
+				 timeElapsed = timer.elapsedTime();
+				 this->boxPreporcessing->Text += "Parse Table Generation Time: " + timeElapsed.ToString() + "sec" + "\r\n";
+				 this->boxPreporcessing->Text += "NPDA Preprocessing Time: " + "0.000" + "sec" + "\r\n";
+				 makeCnfTable();
+				 
 
 				 this->lastTextBox->Text = timeElapsed.ToString();
 	}
@@ -1154,7 +1220,7 @@ namespace TextBox {
 						if (ret == "")
 						{
 							lastTextBox->Text += currentWord + " Not found " + "\r\n";
-							
+
 							return false;
 						}
 						else
@@ -1167,7 +1233,7 @@ namespace TextBox {
 						grammerWords[innerIndex] = gcnew String((it->second).c_str());
 					}
 				}
-				
+
 				return true;
 
 	}
@@ -1175,9 +1241,14 @@ namespace TextBox {
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 
 				 this->lastTextBox->Text = "";
+				 boxExecution->Text = "";
 				 grammer.clear();
 				 notFound = false;
 				 splitInputText();
+
+				 userTimer timer;
+				 timer.start();
+
 				 for (int firstIndex = 0; firstIndex < totalSentences; firstIndex++)
 				 {
 					 bool result;
@@ -1203,6 +1274,9 @@ namespace TextBox {
 
 				 }
 
+				 double timeElapsed = timer.elapsedTime();
+				
+				 boxExecution->Text += "Predictive parsing time: " + timeElapsed.ToString() + "sec" + "\r\n";
 				 /*
 				 for (int i = 0; i < totalSentences; i++)
 				 {
@@ -1226,23 +1300,27 @@ namespace TextBox {
 	private: System::Void button1_Click_1(System::Object^  sender, System::EventArgs^  e) {
 
 				 this->lastTextBox->Text = "";
+				 boxExecution->Text = "";
 				 splitInputText();
 				 /*
 				 if (!notFound)
 				 {
-					 ischeckfinished = false;
+				 ischeckfinished = false;
 
-					 this->lastTextBox->Text = "";
-					 bool ret = npdaAlgorithm(0, "S");
+				 this->lastTextBox->Text = "";
+				 bool ret = npdaAlgorithm(0, "S");
 
-					 if (ischeckfinished)
-					 {
-						 this->lastTextBox->Text += "Sentence is Accepted";
-					 }
-					 else
-						 this->lastTextBox->Text += "Sentence is not Accepted";
+				 if (ischeckfinished)
+				 {
+				 this->lastTextBox->Text += "Sentence is Accepted";
+				 }
+				 else
+				 this->lastTextBox->Text += "Sentence is not Accepted";
 				 }
 				 */
+				 userTimer timer;
+				 timer.start();
+
 				 for (int firstIndex = 0; firstIndex < totalSentences; firstIndex++)
 				 {
 					 bool result;
@@ -1270,6 +1348,10 @@ namespace TextBox {
 
 
 				 }
+
+				 double timeElapsed = timer.elapsedTime();
+
+				 boxExecution->Text += "NPDA parsing time: " + timeElapsed.ToString() + "sec" + "\r\n";
 
 	}
 	private: System::Void exitButton_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -1310,12 +1392,11 @@ namespace TextBox {
 				 aboutForm ^ aboutform = gcnew aboutForm();
 				 aboutform->Show();
 	}
-	private: System::Void viewPOSToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-
+	private: System::Void viewPosButtonFunction(System::Object^  sender, System::EventArgs^  e) {
 				 splitInputText();
 
 				 lastTextBox->Text = "";
-				 
+
 				 for (int i = 0; i < totalSentences; i++)
 				 {
 					 for (int inner = 0;; inner++)
@@ -1323,22 +1404,12 @@ namespace TextBox {
 						 String ^ curString = allGrammerWords[i, inner];
 
 						 if (curString == nullptr) break;
-						 
+
 						 wstring current = marshal_as<std::wstring>(curString);
 						 it = hash.find(current);
 						 if (it == hash.end())
 						 {
-							 string ret = checkWordWithBivokti(current);
-
-							 if (ret == "")
-							 {
-								 lastTextBox->Text += " *";
-							 }
-							 else
-							 {
-								 lastTextBox->Text += " " + gcnew String(ret.c_str());
-							 }
-							 
+							 lastTextBox->Text += " *";
 						 }
 						 else
 						 {
