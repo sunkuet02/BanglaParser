@@ -155,6 +155,7 @@ namespace TextBox {
 			this->mainTextBox->Location = System::Drawing::Point(0, 169);
 			this->mainTextBox->Multiline = true;
 			this->mainTextBox->Name = L"mainTextBox";
+			this->mainTextBox->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
 			this->mainTextBox->Size = System::Drawing::Size(294, 281);
 			this->mainTextBox->TabIndex = 0;
 			// 
@@ -463,7 +464,7 @@ namespace TextBox {
 				if (ischeckfinished)
 					return true;
 
-				this->lastTextBox->Text += gcnew String(current.c_str()) + "\r\n";
+				//this->lastTextBox->Text += gcnew String(current.c_str()) + "\r\n";
 
 				string term = "";
 
@@ -790,8 +791,8 @@ namespace TextBox {
 					if (temp[0] >= 'a' && temp[0] <= 'z')
 					{
 
-						this->lastTextBox->Text += gcnew String(temp.c_str());
-						this->lastTextBox->Text += gcnew String(grammer[idx].c_str()) + "\r\n";
+						//this->lastTextBox->Text += gcnew String(temp.c_str());
+						//this->lastTextBox->Text += gcnew String(grammer[idx].c_str()) + "\r\n";
 						if (temp != grammer[idx] || idx >= (int)grammer.size())
 						{
 							return false;
@@ -1264,11 +1265,11 @@ namespace TextBox {
 
 					 if (result)
 					 {
-						 lastTextBox->Text += showSentence + "-->" + "Accepted" + "\r\n";
+						 //lastTextBox->Text += showSentence + "-->" + "Accepted" + "\r\n";
 					 }
 					 else
 					 {
-						 lastTextBox->Text += showSentence + "-->" + "Not Accepted" + "\r\n";
+						// lastTextBox->Text += showSentence + "-->" + "Not Accepted" + "\r\n";
 					 }
 
 
@@ -1339,11 +1340,11 @@ namespace TextBox {
 
 					 if (ischeckfinished)
 					 {
-						 lastTextBox->Text += showSentence + "-->" + "Accepted" + "\r\n";
+						 //lastTextBox->Text += showSentence + "-->" + "Accepted" + "\r\n";
 					 }
 					 else
 					 {
-						 lastTextBox->Text += showSentence + "-->" + "Not Accepted" + "\r\n";
+						 //lastTextBox->Text += showSentence + "-->" + "Not Accepted" + "\r\n";
 					 }
 
 
@@ -1409,7 +1410,17 @@ namespace TextBox {
 						 it = hash.find(current);
 						 if (it == hash.end())
 						 {
-							 lastTextBox->Text += " *";
+							 string ret = checkWordWithBivokti(current);
+
+							 if (ret == "")
+							 {
+								 lastTextBox->Text += " *";
+							 }
+							 else
+							 {
+								 lastTextBox->Text += " " + gcnew String(ret.c_str());
+							 }
+
 						 }
 						 else
 						 {
