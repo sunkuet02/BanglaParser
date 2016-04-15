@@ -787,7 +787,6 @@ namespace TextBox {
 				{
 					string temp = st.top();
 					st.pop();
-
 					if (temp[0] >= 'a' && temp[0] <= 'z')
 					{
 
@@ -811,7 +810,8 @@ namespace TextBox {
 
 						if (parseTable[nonIdx][terIdx].size() == 0)//Empty of the parsing table 
 						{
-							return false;
+							//this->lastTextBox->Text += gcnew String(temp.c_str()) ;
+							//return false;
 						}
 
 						for (int i = parseTable[nonIdx][terIdx].size() - 1; i >= 0; i--)
@@ -1265,11 +1265,11 @@ namespace TextBox {
 
 					 if (result)
 					 {
-						 //lastTextBox->Text += showSentence + "-->" + "Accepted" + "\r\n";
+						 lastTextBox->Text += showSentence + "-->" + "Accepted" + "\r\n";
 					 }
 					 else
 					 {
-						// lastTextBox->Text += showSentence + "-->" + "Not Accepted" + "\r\n";
+						 lastTextBox->Text += showSentence + "-->" + "Not Accepted" + "\r\n";
 					 }
 
 
@@ -1340,11 +1340,11 @@ namespace TextBox {
 
 					 if (ischeckfinished)
 					 {
-						 //lastTextBox->Text += showSentence + "-->" + "Accepted" + "\r\n";
+						 lastTextBox->Text += showSentence + "-->" + "Accepted" + "\r\n";
 					 }
 					 else
 					 {
-						 //lastTextBox->Text += showSentence + "-->" + "Not Accepted" + "\r\n";
+						 lastTextBox->Text += showSentence + "-->" + "Not Accepted" + "\r\n";
 					 }
 
 
