@@ -1,47 +1,72 @@
 S-NP VP
 NP-noun NP1|pron NP2|adv NP9|AP|verb NP16
-NP1-conj NP11|noun NP3|adv NP22|pron|#
-NP2-conj pron|adv|noun NP22|pron|#
-NP3-adv|conj NP4|pron|#
+NP1-conj noun|noun NP3|adv NP22|pron NP24|#
+NP2-conj pron|adv NP28|noun NP16|pron NP23|adj NP25|#
+AP-adj AP1
+AP1-noun VP29|adj AP2|pron|conj AP|adv NP32|#
+AP2-verb|#
+VP-noun VP1|verb VP2|AP VP3|pron VP17|adv VP9
+VP1-verb VP4|adj noun|pron VP2|adv VP2|noun VP33|#
+VP2-verb VP16|noun VP6|adj VP18|adv VP3|pron|conj VP25|#
+VP3-noun NP3|verb|adj VP5|adv VP9|#
+VP4-verb|noun|#
+VP5-verb|adj verb
+VP6-verb VP7|adj VP7|noun VP22|#
+VP7-noun VP8|#
+VP8-noun VP9|adv VP9|verb VP15|#
+VP9-noun VP10|verb|conj adv|adv|#
+VP10-verb VP14|noun verb|conj NP25|#
+VP14-adj|verb noun|VP11|#
+VP11-noun VP12
+VP12-pron VP13
+VP13-noun verb
+VP15-adj adj
+VP16-verb NP8|adv adv|#
+VP17-verb|noun VP1
+VP18-adj VP19|adv NP21|noun verb|verb|pron VP36
+VP19-adv NP12
+NP3-adv|conj NP4|pron NP25|#
 NP4-noun NP5
 NP5-adv NP6|verb VP5
 NP6-adj NP7
 NP7-adv NP8
-NP8-adv noun|#
-NP9-noun NP10|verb|adv NP14|pron NP11
-NP10-noun NP11|#
-NP11-noun|#
+NP8-adv noun|verb|#
+NP9-noun NP10|pron noun|adj NP26|verb NP25|adv NP33
+NP10-noun|#
 NP12-noun NP13
 NP13-adj NP14
 NP14-adv NP15
-NP15-noun VP|#
-NP16-noun|verb NP17|#
-NP17-noun NP18|conj NP14
-NP18-noun NP19
-NP19-conj NP20
-NP20-noun noun|adv NP22
+NP15-noun VP
+NP16-noun|pron NP24|#
 NP21-noun verb
-NP22-noun|pron|verb NP16|#
-VP-noun VP1|verb VP2|AP VP3|pron VP17|adv VP9|#
-VP1-verb VP4|adj VP7|pron VP2|adv VP2
-VP2-verb VP16|noun VP6|adj VP18|adv VP3|pron|#
-VP3-noun NP3|verb|adj VP5|adv VP9|#
-VP4-verb|noun|adv|adj VP5|#
-VP5-verb|adj verb
-VP6-verb VP7|adj VP7
-VP7-noun VP8|adv VP9|#
-VP8-noun VP9|adv VP9|verb VP15|#
-VP9-noun VP10|verb|conj adv|#
-VP10-verb VP14|noun verb|adv NP18|#
-VP11-noun VP12
-VP12-pron VP13
-VP13-noun verb
-VP14-adj|verb noun|VP11|#
-VP15-adj adj
-VP16-verb NP8|adv adv|#
-VP17-verb|noun VP1
-VP18-adj VP19|adv NP21
-VP19-adv NP12
-AP-adj AP1
-AP1-noun NP10|adj AP2|pron|conj AP|adv NP22|#
-AP2-verb|#
+NP22-verb|noun NP31|#
+NP23-noun|#
+NP24-adj noun|noun|#
+NP25-adv noun
+NP26-noun NP27
+NP27-noun
+NP28-noun NP29|#
+NP29-noun NP30|#
+NP30-noun
+NP31-noun
+NP32-pron|noun
+NP33-noun NP34
+NP34-adv verb
+VP22-conj VP23|verb VP33
+VP23-noun VP24
+VP24-noun
+VP25-adv VP26
+VP26-verb VP27|noun verb
+VP27-verb VP28
+VP28-verb
+VP29-conj VP30|#
+VP30-adv VP31
+VP31-noun VP32
+VP32-noun adv
+VP33-verb VP34
+VP34-verb VP35
+VP35-verb|#
+VP36-noun VP38
+VP38-adv VP39
+VP39-verb VP40
+VP40-noun adv

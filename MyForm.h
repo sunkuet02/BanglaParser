@@ -33,16 +33,16 @@ namespace TextBox {
 	/// </summary>
 	map<string, int> noOfSymbol, npdaSymbol;
 	vector<string >grammer;
-	vector<string> parseTable[200][200], cnfTable[200];
+	vector<string> parseTable[1000][1000], cnfTable[1000];
 	vector<int>tot_word;
 	hash_map<wstring, string> hash;
 	hash_map<wstring, bool > bivoktiMap;
 	hash_map<wchar_t, int> delimiterMarker;
 	hash_map<wstring, string>::const_iterator it;
-	vector<string>splitgrammer[100][100];
-	vector<string>FIRST[100], FOLLOW[100];
+	vector<string>splitgrammer[1000][1000];
+	vector<string>FIRST[1000], FOLLOW[1000];
 	vector<string>Nonterminal, terminal;
-	int totProduction[100];
+	int totProduction[1000];
 
 	int textMarker[1000005];
 	int totalSentences;
@@ -361,9 +361,9 @@ namespace TextBox {
 		array<String^>^ words;
 
 
-		array<String^>^ grammerWords = gcnew array<String^>(110);
+		array<String^>^ grammerWords = gcnew array<String^>(1000);
 
-		array<String^, 2>^ allGrammerWords = gcnew array<String^, 2>(100, 100);
+		array<String^, 2>^ allGrammerWords = gcnew array<String^, 2>(1000, 1000);
 		String ^ showSentence;
 
 		array<String^>^ MainInput;
@@ -811,7 +811,7 @@ namespace TextBox {
 						if (parseTable[nonIdx][terIdx].size() == 0)//Empty of the parsing table 
 						{
 							//this->lastTextBox->Text += gcnew String(temp.c_str()) ;
-							//return false;
+							return false;
 						}
 
 						for (int i = parseTable[nonIdx][terIdx].size() - 1; i >= 0; i--)
@@ -941,7 +941,7 @@ namespace TextBox {
 
 			   Array::Clear(grammerWords, 0, grammerWords->Length);
 
-			   for (int i = 0; i <= 100; i++)
+			   for (int i = 0; i <= 1000; i++)
 			   {
 				   Array::Clear(allGrammerWords, 0, allGrammerWords->Length);
 			   }
