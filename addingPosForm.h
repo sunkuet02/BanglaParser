@@ -166,7 +166,7 @@ namespace TextBox {
 			// 
 			// addingPosForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 11);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(437, 129);
 			this->Controls->Add(this->lblMsg);

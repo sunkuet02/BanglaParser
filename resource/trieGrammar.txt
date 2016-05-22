@@ -1,0 +1,84 @@
+pron pron verb.
+pron noun verb.
+pron verb.
+adv noun noun verb.
+adv noun noun verb.
+noun conj noun adj noun.
+pron noun verb verb.
+noun noun verb.
+noun adj noun noun verb.
+noun adj verb noun.
+adv noun noun adv noun verb.
+pron pron noun verb adj verb.
+pron noun noun verb.
+noun verb.
+noun conj noun adv noun verb.
+pron verb verb verb verb.
+noun pron adj noun verb.
+pron noun pron adj noun verb.
+pron noun noun noun adv noun.
+noun verb noun verb.
+noun verb noun verb.
+adj noun verb noun verb.
+pron adj adv noun verb.
+adv adj noun noun verb.
+pron adv noun noun noun verb.
+adj pron adv verb adv pron verb.
+adv verb adv noun verb.
+noun adj noun verb noun.
+noun adv noun noun verb adv.
+noun adv adj noun verb.
+pron pron verb verb verb.
+noun adv verb noun.
+noun pron adv adv.
+pron noun verb noun noun verb verb verb.
+adj noun noun noun verb verb verb.
+pron adv noun verb conj adv noun verb.
+noun noun adv verb noun verb noun noun noun verb adj.
+adj adv pron noun pron noun verb noun.
+verb noun adj noun adv noun verb noun pron noun verb.
+adj adv pron verb verb adv adv.
+noun adv verb noun verb noun verb adj adj.
+noun noun conj noun adv adj adv adv noun verb verb verb adv noun.
+noun adv pron noun verb noun.
+adv noun noun noun.
+adj noun verb adj adj adv noun adj adv noun noun verb.
+verb verb noun noun conj noun noun.
+noun verb adv adv noun verb verb noun.
+adj noun noun adv adv noun conj noun verb adj verb.
+noun noun pron adv noun adv noun conj adv noun.
+adv noun adv noun noun verb verb verb pron adv adv verb.
+adv adv noun adv verb verb adj pron noun adv verb noun adv.
+noun adv verb verb conj adv verb verb verb.
+noun noun verb.
+pron adv verb.
+noun verb pron.
+adj noun adv noun noun verb.
+adj verb.
+adj noun verb adj adv noun verb.
+pron noun verb adj noun verb.
+noun adv adv verb.
+adv pron noun verb.
+pron adv adv conj adv.
+adv noun verb.
+noun adv adv verb.
+pron noun adv verb verb.
+pron adv verb.
+noun pron noun verb.
+pron noun adv verb.
+noun noun adv noun verb.
+pron adv adv verb.
+pron noun noun verb verb.
+pron noun adv verb.
+noun noun verb verb.
+noun noun noun verb.
+pron verb.
+noun noun noun verb.
+pron noun noun verb.
+pron noun verb noun.
+pron noun noun adv.
+noun adj noun noun adv noun adv.
+noun noun adv adj noun conj adv noun noun adv.
+noun noun adj adv noun.
+adj adv noun pron noun.
+noun verb pron adv adv conj adj verb.

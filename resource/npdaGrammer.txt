@@ -91,5 +91,4 @@ C-conj
 AJ-adj
 A1-adv
 AJ1-adj
-A1-adv
 C1-conj

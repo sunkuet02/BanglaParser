@@ -28,6 +28,7 @@ namespace TextBox {
 	using namespace msclr::interop;
 	using namespace stdext;
 	using namespace System::IO;
+	using namespace Menulab;
 	/// <summary>
 	/// Summary for MyForm
 	/// </summary>
@@ -43,6 +44,21 @@ namespace TextBox {
 	vector<string>FIRST[1000], FOLLOW[1000];
 	vector<string>Nonterminal, terminal;
 	int totProduction[1000];
+
+
+	map<string, int > mapPos;
+
+	struct node
+	{
+		bool val;
+		int next[10];
+	} trie[10000];
+
+
+	int  trieId;
+
+	string trieInputString;
+	wstring lineEnding = L"।";
 
 	int textMarker[1000005];
 	int totalSentences;
@@ -81,7 +97,7 @@ namespace TextBox {
 			}
 		}
 	private: System::Windows::Forms::TextBox^  mainTextBox;
-	private: System::Windows::Forms::TextBox^  lastTextBox;
+
 	protected:
 
 	protected:
@@ -108,6 +124,9 @@ namespace TextBox {
 	private: System::Windows::Forms::Label^  label1;
 	private: System::Windows::Forms::Label^  label2;
 
+	private: System::Windows::Forms::Button^  button4;
+	private: System::Windows::Forms::RichTextBox^  boxRich;
+
 
 
 	private:
@@ -125,7 +144,6 @@ namespace TextBox {
 		{
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm::typeid));
 			this->mainTextBox = (gcnew System::Windows::Forms::TextBox());
-			this->lastTextBox = (gcnew System::Windows::Forms::TextBox());
 			this->sendButton = (gcnew System::Windows::Forms::Button());
 			this->exitButton = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
@@ -144,6 +162,8 @@ namespace TextBox {
 			this->boxExecution = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->boxRich = (gcnew System::Windows::Forms::RichTextBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
@@ -158,18 +178,6 @@ namespace TextBox {
 			this->mainTextBox->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
 			this->mainTextBox->Size = System::Drawing::Size(294, 281);
 			this->mainTextBox->TabIndex = 0;
-			// 
-			// lastTextBox
-			// 
-			this->lastTextBox->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->lastTextBox->Location = System::Drawing::Point(455, 169);
-			this->lastTextBox->Multiline = true;
-			this->lastTextBox->Name = L"lastTextBox";
-			this->lastTextBox->ReadOnly = true;
-			this->lastTextBox->ScrollBars = System::Windows::Forms::ScrollBars::Vertical;
-			this->lastTextBox->Size = System::Drawing::Size(303, 281);
-			this->lastTextBox->TabIndex = 1;
 			// 
 			// sendButton
 			// 
@@ -222,7 +230,7 @@ namespace TextBox {
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(758, 24);
+			this->menuStrip1->Size = System::Drawing::Size(770, 27);
 			this->menuStrip1->TabIndex = 7;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -233,45 +241,45 @@ namespace TextBox {
 					this->saveToolStripMenuItem, this->exitToolStripMenuItem
 			});
 			this->fileToolStripMenuItem->Name = L"fileToolStripMenuItem";
-			this->fileToolStripMenuItem->Size = System::Drawing::Size(37, 20);
+			this->fileToolStripMenuItem->Size = System::Drawing::Size(41, 23);
 			this->fileToolStripMenuItem->Text = L"File";
 			// 
 			// openFileToolStripMenuItem
 			// 
 			this->openFileToolStripMenuItem->Name = L"openFileToolStripMenuItem";
-			this->openFileToolStripMenuItem->Size = System::Drawing::Size(124, 22);
+			this->openFileToolStripMenuItem->Size = System::Drawing::Size(136, 24);
 			this->openFileToolStripMenuItem->Text = L"Open File";
 			this->openFileToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::openFileToolStripMenuItem_Click);
 			// 
 			// saveToolStripMenuItem
 			// 
 			this->saveToolStripMenuItem->Name = L"saveToolStripMenuItem";
-			this->saveToolStripMenuItem->Size = System::Drawing::Size(124, 22);
+			this->saveToolStripMenuItem->Size = System::Drawing::Size(136, 24);
 			this->saveToolStripMenuItem->Text = L"Save ";
 			// 
 			// exitToolStripMenuItem
 			// 
 			this->exitToolStripMenuItem->Name = L"exitToolStripMenuItem";
-			this->exitToolStripMenuItem->Size = System::Drawing::Size(124, 22);
+			this->exitToolStripMenuItem->Size = System::Drawing::Size(136, 24);
 			this->exitToolStripMenuItem->Text = L"Exit";
 			// 
 			// addPOSToolStripMenuItem
 			// 
 			this->addPOSToolStripMenuItem->Name = L"addPOSToolStripMenuItem";
-			this->addPOSToolStripMenuItem->Size = System::Drawing::Size(66, 20);
+			this->addPOSToolStripMenuItem->Size = System::Drawing::Size(76, 23);
 			this->addPOSToolStripMenuItem->Text = L"Add POS";
 			// 
 			// aboutToolStripMenuItem
 			// 
 			this->aboutToolStripMenuItem->Name = L"aboutToolStripMenuItem";
-			this->aboutToolStripMenuItem->Size = System::Drawing::Size(52, 20);
+			this->aboutToolStripMenuItem->Size = System::Drawing::Size(59, 23);
 			this->aboutToolStripMenuItem->Text = L"About";
 			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &MyForm::aboutToolStripMenuItem_Click);
 			// 
 			// helpToolStripMenuItem
 			// 
 			this->helpToolStripMenuItem->Name = L"helpToolStripMenuItem";
-			this->helpToolStripMenuItem->Size = System::Drawing::Size(44, 20);
+			this->helpToolStripMenuItem->Size = System::Drawing::Size(49, 23);
 			this->helpToolStripMenuItem->Text = L"Help";
 			// 
 			// openFileDialog1
@@ -282,7 +290,7 @@ namespace TextBox {
 			// 
 			this->button2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->button2->Location = System::Drawing::Point(300, 300);
+			this->button2->Location = System::Drawing::Point(300, 328);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(149, 31);
 			this->button2->TabIndex = 8;
@@ -315,7 +323,7 @@ namespace TextBox {
 				static_cast<System::Byte>(0)));
 			this->label1->Location = System::Drawing::Point(77, 88);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(118, 13);
+			this->label1->Size = System::Drawing::Size(148, 16);
 			this->label1->TabIndex = 10;
 			this->label1->Text = L"Preprocessing Time";
 			// 
@@ -326,15 +334,45 @@ namespace TextBox {
 				static_cast<System::Byte>(0)));
 			this->label2->Location = System::Drawing::Point(575, 88);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(94, 13);
+			this->label2->Size = System::Drawing::Size(114, 16);
 			this->label2->TabIndex = 10;
 			this->label2->Text = L"Execution Time";
+			// 
+			// button4
+			// 
+			this->button4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->button4->Location = System::Drawing::Point(300, 257);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(149, 40);
+			this->button4->TabIndex = 12;
+			this->button4->Text = L"Trie Parser";
+			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &MyForm::button4_Click);
+			// 
+			// boxRich
+			// 
+			this->boxRich->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->boxRich->Cursor = System::Windows::Forms::Cursors::IBeam;
+			this->boxRich->DetectUrls = false;
+			this->boxRich->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->boxRich->Location = System::Drawing::Point(455, 169);
+			this->boxRich->Name = L"boxRich";
+			this->boxRich->ReadOnly = true;
+			this->boxRich->ScrollBars = System::Windows::Forms::RichTextBoxScrollBars::Vertical;
+			this->boxRich->Size = System::Drawing::Size(303, 281);
+			this->boxRich->TabIndex = 13;
+			this->boxRich->Text = L"";
+			this->boxRich->ZoomFactor = 2;
 			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(758, 475);
+			this->ClientSize = System::Drawing::Size(770, 479);
+			this->Controls->Add(this->boxRich);
+			this->Controls->Add(this->button4);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->boxExecution);
@@ -344,7 +382,6 @@ namespace TextBox {
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->exitButton);
 			this->Controls->Add(this->sendButton);
-			this->Controls->Add(this->lastTextBox);
 			this->Controls->Add(this->mainTextBox);
 			this->Controls->Add(this->menuStrip1);
 			this->MainMenuStrip = this->menuStrip1;
@@ -372,6 +409,109 @@ namespace TextBox {
 
 
 #pragma endregion
+
+
+		//Trie Tree
+
+		public:void mappingOfPOS()
+		{
+			mapPos["noun"] = 1;
+			mapPos["pron"] = 2;
+			mapPos["verb"] = 3;
+			mapPos["adj"] = 4;
+			mapPos["adv"] = 5;
+			mapPos["conj"] = 6;
+		}
+		
+		public:void initTrieNode(int v)
+		{
+				   trie[v].val = false;
+				   for (int i = 0; i < 9;i++)
+					   trie[v].next[i] = -1;
+		}
+
+		public:void buildTrieTree(string inputString)
+		{
+				   //lastTextBox->Text += gcnew String(inputString.c_str()) + "\r\n";
+				   int v = 0;
+				   string seperator = "";
+				   for (int i = 0; i< inputString.size(); i++)
+				   {
+					   if (inputString[i] == ' ' || inputString[i] == '.')
+					   {
+						   int a = mapPos[seperator];
+						   seperator.clear();
+
+						   if (trie[v].next[a] == -1)
+						   {
+							   v = trie[v].next[a] = ++trieId;
+							   initTrieNode(v);
+						   }
+						   else
+						   {
+							   v = trie[v].next[a];
+						   }
+					   }
+					   else
+					   {
+						   seperator += inputString[i];
+					   }
+				   }
+				   trie[v].val = true;
+		}
+
+
+		public:bool searchTriee(string inputString)
+		{
+				   int v = 0;
+				   string seperator = "";
+				   for (int i = 0; i< inputString.size(); i++)
+				   {
+					   if (inputString[i] == ' ' || inputString[i] == '.')
+					   {
+						   int a = mapPos[seperator];
+						   seperator.clear();
+
+						   if (trie[v].next[a] == -1)
+						   {
+							   return false;
+						   }
+						   else
+						   {
+							   v = trie[v].next[a];
+						   }
+					   }
+					   else
+					   {
+						   seperator += inputString[i];
+					   }
+				   }
+
+				   return trie[v].val;
+		}
+
+
+		public: void TrieTree (){
+
+					mappingOfPOS();
+					initTrieNode(0);
+					trieId = 0;
+
+					 StreamReader^ reader = File::OpenText("resource/trieGrammar.txt");
+					 String^ readString;
+
+					 while ((readString = reader->ReadLine()) != nullptr)
+					 {
+						 string str = marshal_as<std::string>(readString);
+
+						 buildTrieTree(str);
+						 
+						 //lastTextBox->Text += readString + " ";
+					 }
+
+		}
+
+
 
 		// table for npda
 
@@ -834,21 +974,56 @@ namespace TextBox {
 	}
 	public: Void getGrammer()
 	{
-
+				trieInputString = "";
 				grammer.clear();
+				int first = 0;
 				for each(String ^ str in grammerWords)
 				{
+					
 					if (str == nullptr) break;
+
+					if (first)
+						trieInputString += " ";
 
 					std::string stdString = marshal_as<std::string>(str);
 
-					grammer.push_back(stdString);
+					trieInputString += stdString;
 
+
+					grammer.push_back(stdString);
+					first = 1;
 				}
+
+				trieInputString += '.';
 
 				grammer.push_back("$");
 
 	}
+
+
+	public: Void getGrammerForTrie()
+	{
+				trieInputString = "";
+				int first = 0;
+				for each(String ^ str in grammerWords)
+				{
+
+					if (str == nullptr) break;
+
+					if (first)
+						trieInputString += " ";
+
+					std::string stdString = marshal_as<std::string>(str);
+
+					trieInputString += stdString;
+
+					first = 1;
+				}
+
+				trieInputString += '.';
+
+	}
+
 	public: string checkWordWithBivokti(wstring index)
 	{
 				wstring compString = L"";
@@ -1191,11 +1366,20 @@ namespace TextBox {
 				 genParseTable();
 				 timeElapsed = timer.elapsedTime();
 				 this->boxPreporcessing->Text += "Parse Table Generation Time: " + timeElapsed.ToString() + "sec" + "\r\n";
-				 this->boxPreporcessing->Text += "NPDA Preprocessing Time: " + "0.000" + "sec" + "\r\n";
-				 makeCnfTable();
 				 
+				 timer.start();
+				 makeCnfTable();
+				 timeElapsed = timer.elapsedTime();
 
-				 this->lastTextBox->Text = timeElapsed.ToString();
+				 this->boxPreporcessing->Text += "NPDA Preprocessing Time: " + timeElapsed.ToString() + "sec" + "\r\n";
+
+				 timer.start();
+
+				 TrieTree();
+
+				 timeElapsed = timer.elapsedTime();
+
+				 this->boxPreporcessing->Text += "Trie Tree Generation Time: " + timeElapsed.ToString() + "sec" + "\r\n";
 	}
 
 	public: bool checkIfRunAlgorithm(int firstIndex)
@@ -1220,7 +1404,7 @@ namespace TextBox {
 						string ret = checkWordWithBivokti(current);
 						if (ret == "")
 						{
-							lastTextBox->Text += currentWord + " Not found " + "\r\n";
+							boxRich->Text += currentWord + " Not found " + "\r\n";
 
 							return false;
 						}
@@ -1241,7 +1425,7 @@ namespace TextBox {
 
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 
-				 this->lastTextBox->Text = "";
+				 boxRich->Text = "";
 				 boxExecution->Text = "";
 				 grammer.clear();
 				 notFound = false;
@@ -1265,11 +1449,12 @@ namespace TextBox {
 
 					 if (result)
 					 {
-						 lastTextBox->Text += showSentence + "-->" + "Accepted" + "\r\n";
+						 boxRich->AppendText(showSentence + "|"+"\r\n");
 					 }
 					 else
 					 {
-						 lastTextBox->Text += showSentence + "-->" + "Not Accepted" + "\r\n";
+						 boxRich->SelectionColor = Color::Red;
+						 boxRich->AppendText(showSentence + "|" +"\r\n");
 					 }
 
 
@@ -1300,7 +1485,7 @@ namespace TextBox {
 	}
 	private: System::Void button1_Click_1(System::Object^  sender, System::EventArgs^  e) {
 
-				 this->lastTextBox->Text = "";
+				 boxRich->Text = "";
 				 boxExecution->Text = "";
 				 splitInputText();
 				 /*
@@ -1340,11 +1525,12 @@ namespace TextBox {
 
 					 if (ischeckfinished)
 					 {
-						 lastTextBox->Text += showSentence + "-->" + "Accepted" + "\r\n";
+						 boxRich->AppendText(showSentence +"|" +  "\r\n");
 					 }
 					 else
 					 {
-						 lastTextBox->Text += showSentence + "-->" + "Not Accepted" + "\r\n";
+						 boxRich->SelectionColor = Color::Red;
+						 boxRich->AppendText(showSentence + "|" + "\r\n");
 					 }
 
 
@@ -1396,7 +1582,7 @@ namespace TextBox {
 	private: System::Void viewPosButtonFunction(System::Object^  sender, System::EventArgs^  e) {
 				 splitInputText();
 
-				 lastTextBox->Text = "";
+				 boxRich->Text = "";
 
 				 for (int i = 0; i < totalSentences; i++)
 				 {
@@ -1414,23 +1600,64 @@ namespace TextBox {
 
 							 if (ret == "")
 							 {
-								 lastTextBox->Text += " *";
+								 boxRich->Text += "* ";
 							 }
 							 else
 							 {
-								 lastTextBox->Text += " " + gcnew String(ret.c_str());
+								 boxRich->Text += gcnew String(ret.c_str()) + " "; 
 							 }
 
 						 }
 						 else
 						 {
-							 lastTextBox->Text += " " + gcnew String(it->second.c_str());
+							 boxRich->Text += gcnew String(it->second.c_str()) + " ";
 						 }
 					 }
 
-					 lastTextBox->Text += ". ";
+					 boxRich->Text += ". "+"\r\n";
 				 }
 	}
-	};
+	private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e) {
+				 this->boxRich->Text = "";
+				 boxExecution->Text = "";
+				 splitInputText();
+
+				 userTimer timer;
+				 timer.start();
+
+				 for (int firstIndex = 0; firstIndex < totalSentences; firstIndex++)
+				 {
+					 bool result;
+					 ischeckfinished = false;
+
+					 if (checkIfRunAlgorithm(firstIndex))
+					 {
+						 ischeckfinished = false;
+						 getGrammerForTrie();
+
+						 result = searchTriee(trieInputString);
+					 }
+					 else
+					 {
+						 result = false;
+					 }
+
+					 if (result)
+					 {
+						 boxRich->AppendText(showSentence + "|" + "\r\n");
+					 }
+					 else
+					 {
+						 boxRich->SelectionColor = Color::Red;
+						 boxRich->AppendText(showSentence + "|" + "\r\n");
+					 }
+
+				 }
+
+				 double timeElapsed = timer.elapsedTime();
+
+				 boxExecution->Text += "Trie parsing time: " + timeElapsed.ToString() + "sec" + "\r\n";
+	}
+};
 
 }
